@@ -29,7 +29,12 @@ const Hero = ({ onOrderNow }) => {
           >
             <motion.div className="hero-badge" variants={itemVariants}>
               🍱 Fresh · Hygienic · Homestyle
+             
+              <div>
+              🍱 Get instant services
+              </div>
             </motion.div>
+            
             <motion.h1 variants={itemVariants}>
               Delicious Meals<br />
               Delivered to Your<br />
