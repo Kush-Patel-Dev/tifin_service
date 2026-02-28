@@ -1,0 +1,147 @@
+.auth-modal-header {
+  background: var(--saffron);
+  color: #fff;
+  padding: 24px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-modal-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.auth-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  line-height: 1;
+}
+
+.auth-close:hover {
+  opacity: 1;
+}
+
+.auth-modal-body {
+  padding: 28px;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--saffron);
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--saffron);
+}
+
+.auth-tab.active {
+  background: var(--saffron);
+  color: #fff;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  color: var(--warm-gray);
+  font-size: 0.82rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0d6cc;
+}
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #e0d6cc;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--deep);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.btn-google:hover {
+  border-color: var(--saffron);
+  background: var(--cream);
+}
+
+.btn-auth-submit {
+  background: var(--saffron);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  width: 100%;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.btn-auth-submit:hover {
+  background: var(--saffron-dark);
+}
+
+.auth-footer-text {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--warm-gray);
+  margin-top: 8px;
+}
+
+.auth-footer-text a {
+  color: var(--saffron);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

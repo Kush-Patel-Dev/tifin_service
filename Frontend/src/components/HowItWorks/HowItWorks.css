@@ -1,0 +1,76 @@
+.how-section {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.step-card {
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.step-number {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 auto 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-connector {
+  position: absolute;
+  top: 65px;
+  left: 60%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(to right, var(--saffron), rgba(232,133,26,0.2));
+}
+
+.step-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 0.87rem;
+  color: var(--warm-gray);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .step-connector {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

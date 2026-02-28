@@ -1,0 +1,243 @@
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.hero-bg-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(135deg, #FEE9C7 0%, #FDDDAA 100%);
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  z-index: 0;
+}
+
+.hero-dots {
+  position: absolute;
+  top: 60px;
+  right: 80px;
+  width: 180px;
+  height: 180px;
+  background-image: radial-gradient(circle, var(--saffron) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.hero-circle {
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 40px solid rgba(232,133,26,0.08);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-row {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-right {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(232,133,26,0.12);
+  color: var(--saffron-dark);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 22px;
+}
+
+.hero h1 em {
+  color: var(--saffron);
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--warm-gray);
+  max-width: 480px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.stat-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--saffron);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--warm-gray);
+  font-weight: 500;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Hero Image */
+.hero-image-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-main-img {
+  width: 100%;
+  max-width: 460px;
+  border-radius: 28px;
+  box-shadow: 0 30px 80px rgba(26,18,8,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #f4a261 0%, #e76f51 100%);
+  font-size: 8rem;
+}
+
+.hero-food-card {
+  position: absolute;
+  bottom: -20px;
+  left: -30px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.food-card-icon {
+  font-size: 2rem;
+}
+
+.food-card-title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--deep);
+}
+
+.food-card-sub {
+  font-size: 0.75rem;
+  color: var(--warm-gray);
+}
+
+.hero-rating-card {
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  background: var(--deep);
+  border-radius: 16px;
+  padding: 12px 18px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  animation: float 3s 1.5s ease-in-out infinite;
+}
+
+.rating-num {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rating-stars {
+  color: var(--saffron);
+  font-size: 0.75rem;
+}
+
+.rating-label {
+  font-size: 0.68rem;
+  opacity: 0.6;
+  margin-top: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 80px 0 60px;
+  }
+
+  .hero-bg-pattern {
+    width: 100%;
+    clip-path: none;
+    opacity: 0.3;
+  }
+
+  .hero-row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hero-food-card,
+  .hero-rating-card {
+    display: none;
+  }
+
+  .hero-stats {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,25 @@
+:root {
+  --saffron: #E8851A;
+  --saffron-dark: #C46D0E;
+  --saffron-light: #FEE9C7;
+  --cream: #FDF6EC;
+  --deep: #1A1208;
+  --warm-gray: #6B5B4E;
+  --leaf: #4A7C59;
+  --card-bg: #FFFBF5;
+  --white: #ffffff;
+  --border-light: rgba(232,133,26,0.1);
+  --border-medium: rgba(232,133,26,0.15);
+  --shadow-sm: 0 4px 15px rgba(232,133,26,0.08);
+  --shadow-md: 0 10px 40px rgba(232,133,26,0.12);
+  --shadow-lg: 0 20px 60px rgba(232,133,26,0.2);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-pill: 50px;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+}
