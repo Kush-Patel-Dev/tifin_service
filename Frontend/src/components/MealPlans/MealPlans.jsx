@@ -72,36 +72,38 @@ const MealPlans = ({ onOrderNow }) => {
             </p>
           </ScrollReveal>
         </div>
-        <div className="plans-grid">
+        <div className="row justify-content-center">
           {plans.map((plan, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className={`plan-card${plan.featured ? ' featured' : ''}`}>
-                {plan.badge && <div className="plan-badge">{plan.badge}</div>}
-                <div className="plan-header">
-                  <div className="plan-icon">{plan.icon}</div>
-                  <div className="plan-name">{plan.name}</div>
-                  <div className="plan-desc">{plan.desc}</div>
+            <div className="col-lg-4 col-md-6 col-12 mb-4" key={i}>
+              <ScrollReveal delay={i * 0.1}>
+                <div className={`plan-card h-100${plan.featured ? ' featured' : ''}`}>
+                  {plan.badge && <div className="plan-badge">{plan.badge}</div>}
+                  <div className="plan-header">
+                    <div className="plan-icon">{plan.icon}</div>
+                    <div className="plan-name">{plan.name}</div>
+                    <div className="plan-desc">{plan.desc}</div>
+                  </div>
+                  <div className="plan-price-wrap">
+                    <span className="plan-price"><sup>₹</sup>{plan.price}</span>
+                    <span className="plan-period">{plan.period}</span>
+                  </div>
+                  <div className="plan-features">
+                    {plan.features.map((f, j) => (
+                      <div className="plan-feature-item" key={j}>
+                        <i className={`bi ${f.included ? 'bi-check-circle-fill' : 'bi-x-circle excluded'}`}></i>
+                        {f.text}
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    className={`btn-plan${plan.featured ? ' active' : ''}`}
+                    onClick={onOrderNow}
+                  >
+                    {plan.buttonText}
+                  </button>
                 </div>
-                <div className="plan-price-wrap">
-                  <span className="plan-price"><sup>₹</sup>{plan.price}</span>
-                  <span className="plan-period">{plan.period}</span>
-                </div>
-                <div className="plan-features">
-                  {plan.features.map((f, j) => (
-                    <div className="plan-feature-item" key={j}>
-                      <i className={`bi ${f.included ? 'bi-check-circle-fill' : 'bi-x-circle excluded'}`}></i>
-                      {f.text}
-                    </div>
-                  ))}
-                </div>
-                <button
-                  className={`btn-plan${plan.featured ? ' active' : ''}`}
-                  onClick={onOrderNow}
-                >
-                  {plan.buttonText}
-                </button>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           ))}
         </div>
       </div>

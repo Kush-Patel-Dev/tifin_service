@@ -232,4 +232,14 @@ input, select, textarea {
   .container {
     padding: 0 16px;
   }
+  body {
+    text-align: center;
+  }
+  .btn-primary, .btn-outline {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .btn-outline {
+    border-width: 1.5px;
+  }
 }

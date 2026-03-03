@@ -63,21 +63,23 @@ const MenuPreview = () => {
           </div>
         </ScrollReveal>
 
-        <div className="menu-grid">
+        <div className="row justify-content-center">
           {menuData[activeTab].map((item, i) => (
-            <ScrollReveal key={`${activeTab}-${i}`} delay={i * 0.08}>
-              <div className="menu-item-card">
-                <div className="menu-item-img">{item.icon}</div>
-                <div className="menu-item-body">
-                  <div className="menu-item-name">{item.name}</div>
-                  <div className="menu-item-desc">{item.desc}</div>
-                  <div className="menu-item-footer">
-                    <div className="menu-item-price">{item.price}</div>
-                    <div className="menu-item-cal">{item.cal}</div>
+            <div className="col-lg-3 col-md-6 col-12 mb-4" key={`${activeTab}-${i}`}>
+              <ScrollReveal delay={i * 0.08} className="h-100">
+                <div className="menu-item-card h-100">
+                  <div className="menu-item-img">{item.icon}</div>
+                  <div className="menu-item-body">
+                    <div className="menu-item-name">{item.name}</div>
+                    <div className="menu-item-desc">{item.desc}</div>
+                    <div className="menu-item-footer">
+                      <div className="menu-item-price">{item.price}</div>
+                      <div className="menu-item-cal">{item.cal}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           ))}
         </div>
       </div>

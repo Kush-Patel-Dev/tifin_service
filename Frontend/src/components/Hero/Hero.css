@@ -110,6 +110,12 @@
   margin-top: 48px;
 }
 
+@media (max-width: 768px) {
+  .hero-stats {
+    margin-top: 28px;
+  }
+}
+
 .stat-num {
   font-family: var(--font-heading);
   font-size: 2rem;
@@ -231,13 +237,48 @@
     gap: 40px;
   }
 
-  .hero-food-card,
+  .hero-image-wrap {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .hero-food-card {
+    left: -10px;
+    bottom: -16px;
+    padding: 10px 14px;
+    border-radius: 14px;
+  }
+
+  .hero-food-card .food-card-icon {
+    font-size: 1.5rem;
+  }
+
+  .hero-food-card .food-card-title {
+    font-size: 0.78rem;
+  }
+
+  .hero-food-card .food-card-sub {
+    font-size: 0.68rem;
+  }
+
   .hero-rating-card {
-    display: none;
+    right: -10px;
+    top: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  .hero-rating-card .rating-num {
+    font-size: 1.4rem;
   }
 
   .hero-stats {
     gap: 24px;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat-num {
+    font-size: 1.6rem;
   }
 }

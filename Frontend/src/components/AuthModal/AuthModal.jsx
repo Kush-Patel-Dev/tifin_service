@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import './AuthModal.css';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import "./AuthModal.css";
 
 const AuthModal = ({ isOpen, onClose }) => {
-  const [mode, setMode] = useState('signin');
+  const [mode, setMode] = useState("signin");
 
   if (!isOpen) return null;
 
@@ -30,58 +30,80 @@ const AuthModal = ({ isOpen, onClose }) => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="auth-modal-header">
-            <h3>🍱 {mode === 'signin' ? 'Welcome Back!' : 'Join TiffinBox'}</h3>
-            <button className="auth-close" onClick={onClose}>×</button>
+            <h3>🍱 {mode === "signin" ? "Welcome Back!" : "Join TiffinBox"}</h3>
+            <button className="auth-close" onClick={onClose}>
+              ×
+            </button>
           </div>
           <div className="auth-modal-body">
             <div className="auth-tabs">
               <button
-                className={`auth-tab${mode === 'signin' ? ' active' : ''}`}
-                onClick={() => setMode('signin')}
+                className={`auth-tab${mode === "signin" ? " active" : ""}`}
+                onClick={() => setMode("signin")}
               >
                 Sign In
               </button>
               <button
-                className={`auth-tab${mode === 'signup' ? ' active' : ''}`}
-                onClick={() => setMode('signup')}
+                className={`auth-tab${mode === "signup" ? " active" : ""}`}
+                onClick={() => setMode("signup")}
               >
                 Sign Up
               </button>
             </div>
 
             <form className="auth-form" onSubmit={handleSubmit}>
-              {mode === 'signup' && (
+              {mode === "signup" && (
                 <div className="form-row">
                   <div className="form-group">
                     <label className="form-label">First Name</label>
-                    <input className="form-input" type="text" placeholder="Priya" />
+                    <input
+                      className="form-input"
+                      type="text"
+                      placeholder="Priya"
+                    />
                   </div>
                   <div className="form-group">
                     <label className="form-label">Last Name</label>
-                    <input className="form-input" type="text" placeholder="Sharma" />
+                    <input
+                      className="form-input"
+                      type="text"
+                      placeholder="Sharma"
+                    />
                   </div>
                 </div>
               )}
 
               <div className="form-group">
                 <label className="form-label">Email Address</label>
-                <input className="form-input" type="email" placeholder="you@example.com" />
+                <input
+                  className="form-input"
+                  type="email"
+                  placeholder="you@example.com"
+                />
               </div>
 
               <div className="form-group">
                 <label className="form-label">Password</label>
-                <input className="form-input" type="password" placeholder="••••••••" />
+                <input
+                  className="form-input"
+                  type="password"
+                  placeholder="••••••••"
+                />
               </div>
 
-              {mode === 'signup' && (
+              {mode === "signup" && (
                 <div className="form-group">
                   <label className="form-label">Phone Number</label>
-                  <input className="form-input" type="tel" placeholder="+91 XXXXX XXXXX" />
+                  <input
+                    className="form-input"
+                    type="tel"
+                    placeholder="+91 XXXXX XXXXX"
+                  />
                 </div>
               )}
 
               <button type="submit" className="btn-auth-submit">
-                {mode === 'signin' ? 'Sign In' : 'Create Account'}
+                {mode === "signin" ? "Sign In" : "Create Account"}
               </button>
 
               <div className="auth-divider">or</div>
@@ -92,10 +114,16 @@ const AuthModal = ({ isOpen, onClose }) => {
               </button>
 
               <p className="auth-footer-text">
-                {mode === 'signin' ? (
-                  <>Don't have an account? <a onClick={() => setMode('signup')}>Sign Up</a></>
+                {mode === "signin" ? (
+                  <>
+                    Don't have an account?{" "}
+                    <a onClick={() => setMode("signup")}>Sign Up</a>
+                  </>
                 ) : (
-                  <>Already have an account? <a onClick={() => setMode('signin')}>Sign In</a></>
+                  <>
+                    Already have an account?{" "}
+                    <a onClick={() => setMode("signin")}>Sign In</a>
+                  </>
                 )}
               </p>
             </form>

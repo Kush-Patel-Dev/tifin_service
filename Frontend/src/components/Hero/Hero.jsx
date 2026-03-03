@@ -1,16 +1,16 @@
-import { motion } from 'framer-motion';
-import './Hero.css';
+import { motion } from "framer-motion";
+import "./Hero.css";
 
 const containerVariants = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.12 }
-  }
+    transition: { staggerChildren: 0.12 },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const Hero = ({ onOrderNow }) => {
@@ -29,30 +29,46 @@ const Hero = ({ onOrderNow }) => {
           >
             <motion.div className="hero-badge" variants={itemVariants}>
               🍱 Fresh · Hygienic · Homestyle
-             
-              <div>
-              🍱 Get instant services
-              </div>
+              <div>🚚 Get instant services</div>
             </motion.div>
-            
+
             <motion.h1 variants={itemVariants}>
-              Delicious Meals<br />
-              Delivered to Your<br />
+              Delicious Meals
+              <br />
+              Delivered to Your
+              <br />
               <em>Doorstep Daily</em>
             </motion.h1>
             <motion.p className="hero-desc" variants={itemVariants}>
-              Subscribe to our handcrafted tiffin service and enjoy nutritious, home-style meals
-              freshly prepared each day. No cooking, no hassle — just wholesome food.
+              Subscribe to our handcrafted tiffin service and enjoy nutritious,
+              home-style meals freshly prepared each day. No cooking, no hassle
+              — just wholesome food.
             </motion.p>
             <motion.div className="hero-actions" variants={itemVariants}>
-              <a href="#plans" className="btn-primary" onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#plans')?.scrollIntoView({ behavior: 'smooth' });
-              }}>Explore Meal Plans</a>
-              <a href="#menu" className="btn-outline" onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#menu')?.scrollIntoView({ behavior: 'smooth' });
-              }}>View Today's Menu</a>
+              <a
+                href="#plans"
+                className="btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .querySelector("#plans")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Explore Meal Plans
+              </a>
+              <a
+                href="#menu"
+                className="btn-outline"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .querySelector("#menu")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                View Today's Menu
+              </a>
             </motion.div>
             <motion.div className="hero-stats" variants={itemVariants}>
               <div className="stat-item">

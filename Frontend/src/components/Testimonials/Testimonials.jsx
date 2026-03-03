@@ -45,25 +45,27 @@ const Testimonials = () => {
             </p>
           </ScrollReveal>
         </div>
-        <div className="testimonials-grid">
-          {testimonials.map((t, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="testimonial-card">
-                <div className="testimonial-stars">
-                  {'★'.repeat(t.stars)}
-                </div>
-                <p className="testimonial-text">{t.text}</p>
-                <div className="reviewer-info">
-                  <div className="reviewer-avatar" style={{ background: t.gradient }}>
-                    {t.initial}
+        <div className="row justify-content-center">
+          {testimonials.slice(0, 2).map((t, i) => (
+            <div className="col-lg-6 col-md-6 col-12 mb-4" key={i}>
+              <ScrollReveal delay={i * 0.1}>
+                <div className="testimonial-card">
+                  <div className="testimonial-stars">
+                    {'★'.repeat(t.stars)}
                   </div>
-                  <div>
-                    <div className="reviewer-name">{t.name}</div>
-                    <div className="reviewer-loc">{t.loc}</div>
+                  <p className="testimonial-text">{t.text}</p>
+                  <div className="reviewer-info">
+                    <div className="reviewer-avatar" style={{ background: t.gradient }}>
+                      {t.initial}
+                    </div>
+                    <div>
+                      <div className="reviewer-name">{t.name}</div>
+                      <div className="reviewer-loc">{t.loc}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+            </div>
           ))}
         </div>
       </div>
