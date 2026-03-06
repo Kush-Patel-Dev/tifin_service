@@ -109,3 +109,30 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .sub-modal-body {
+  background: #1a1a2e;
+}
+
+[data-theme="dark"] .form-select {
+  background-color: #16213e;
+  border-color: #2a2a4a;
+  color: var(--deep);
+}
+
+[data-theme="dark"] .form-select:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(232, 133, 26, 0.2);
+}
+
+[data-theme="dark"] .form-textarea {
+  background: #16213e;
+  border-color: #2a2a4a;
+  color: var(--deep);
+}
+
+[data-theme="dark"] .form-textarea:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(232, 133, 26, 0.2);
+}

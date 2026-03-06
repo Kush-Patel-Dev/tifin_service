@@ -132,3 +132,17 @@
   background: var(--saffron);
   color: #fff;
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .plan-card {
+  background: #1a1a2e;
+  border-color: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .plan-card:hover {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .plan-header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}

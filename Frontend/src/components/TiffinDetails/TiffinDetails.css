@@ -159,3 +159,29 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .tiffin-section {
+  background: #16213e;
+}
+
+[data-theme="dark"] .tiffin-card {
+  background: #1a1a2e;
+  border-color: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .tiffin-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .tiffin-card-img {
+  background: linear-gradient(135deg, #2a1f10, #3d2a10);
+}
+
+[data-theme="dark"] .nutrition-item {
+  background: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .ingredient-tag {
+  background: rgba(74, 124, 89, 0.15);
+}

@@ -17,6 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 1400px;
+  padding: 0 30px;
 }
 
 .brand-logo {
@@ -103,6 +105,13 @@
   transform: translateY(-1px);
 }
 
+/* Right side: toggle + hamburger */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* Mobile hamburger */
 .hamburger {
   display: none;
@@ -135,7 +144,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .hamburger {
     display: flex;
   }
@@ -184,5 +193,41 @@
     flex-direction: column;
     justify-content: center;
     gap: 12px;
+  }
+}
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .navbar {
+  background: rgba(18, 18, 32, 0.95);
+  border-bottom-color: rgba(232, 133, 26, 0.1);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .hamburger span {
+  background: var(--deep);
+}
+
+[data-theme="dark"] .btn-sign-in {
+  color: var(--warm-gray);
+}
+
+[data-theme="dark"] .btn-sign-in:hover {
+  color: var(--saffron);
+}
+
+@media (max-width: 992px) {
+  [data-theme="dark"] .nav-center {
+    background: rgba(18, 18, 32, 0.98);
+  }
+
+  [data-theme="dark"] .nav-link:hover {
+    background: rgba(232, 133, 26, 0.1);
+  }
+
+  [data-theme="dark"] .nav-actions {
+    border-top-color: rgba(232, 133, 26, 0.1);
   }
 }

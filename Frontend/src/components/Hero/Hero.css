@@ -282,3 +282,58 @@
     font-size: 1.6rem;
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .hero {
+  background: var(--cream);
+}
+
+[data-theme="dark"] .hero-bg-pattern {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+[data-theme="dark"] .hero-food-card {
+  background: #1a1a2e;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .hero-circle {
+  border-color: rgba(232, 133, 26, 0.06);
+}
+
+[data-theme="dark"] .hero-rating-card {
+  background: #1a1a2e;
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .rating-num {
+  color: #fff;
+}
+
+[data-theme="dark"] .rating-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .hero-badge {
+  background: rgba(232, 133, 26, 0.15);
+  color: var(--saffron);
+}
+
+[data-theme="dark"] .hero-dots {
+  opacity: 0.15;
+}
+
+[data-theme="dark"] .hero-main-img {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .hero .btn-outline {
+  border-color: rgba(232, 232, 227, 0.4);
+  color: var(--deep);
+}
+
+[data-theme="dark"] .hero .btn-outline:hover {
+  background: rgba(232, 232, 227, 0.12);
+  border-color: var(--deep);
+}
