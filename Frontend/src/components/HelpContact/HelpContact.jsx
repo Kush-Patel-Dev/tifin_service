@@ -102,7 +102,7 @@ const HelpContact = () => {
                   </div>
                   <div>
                     <div className="contact-info-label">Phone</div>
-                    <div className="contact-info-value">+91 98765 43210</div>
+                    <div className="contact-info-value">+91 99248 94483</div>
                   </div>
                 </div>
                 <div className="contact-info-card">
@@ -120,7 +120,7 @@ const HelpContact = () => {
                   </div>
                   <div>
                     <div className="contact-info-label">Serving Areas</div>
-                    <div className="contact-info-value">Ahmedabad, Surat & Rajkot</div>
+                    <div className="contact-info-value">Bhavnagar, Gujarat</div>
                   </div>
                 </div>
               </div>

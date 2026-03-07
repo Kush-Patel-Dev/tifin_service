@@ -1,22 +1,37 @@
-import { useState } from 'react';
-import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import Features from './components/Features/Features';
-import MealPlans from './components/MealPlans/MealPlans';
-import MenuPreview from './components/MenuPreview/MenuPreview';
-import HowItWorks from './components/HowItWorks/HowItWorks';
-import Testimonials from './components/Testimonials/Testimonials';
-import TiffinDetails from './components/TiffinDetails/TiffinDetails';
-import CallToAction from './components/CallToAction/CallToAction';
-import HelpContact from './components/HelpContact/HelpContact';
-import Footer from './components/Footer/Footer';
-import AuthModal from './components/AuthModal/AuthModal';
-import SubscriptionModal from './components/SubscriptionModal/SubscriptionModal';
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import Features from "./components/Features/Features";
+import MealPlans from "./components/MealPlans/MealPlans";
+import MenuPreview from "./components/MenuPreview/MenuPreview";
+import HowItWorks from "./components/HowItWorks/HowItWorks";
+import Testimonials from "./components/Testimonials/Testimonials";
+import TiffinDetails from "./components/TiffinDetails/TiffinDetails";
+import CallToAction from "./components/CallToAction/CallToAction";
+import HelpContact from "./components/HelpContact/HelpContact";
+import Footer from "./components/Footer/Footer";
+import AuthModal from "./components/AuthModal/AuthModal";
+import SubscriptionModal from "./components/SubscriptionModal/SubscriptionModal";
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState("signin");
   const [showSubscription, setShowSubscription] = useState(false);
   const [showToast, setShowToast] = useState(false);
+
+  // Listen for auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User logged in:", user.email || user.displayName);
+      } else {
+        console.log("User logged out");
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const handleOrderSuccess = () => {
     setShowToast(true);
@@ -26,7 +41,10 @@ function App() {
   return (
     <>
       <Navbar
-        onSignIn={() => setShowAuth(true)}
+        onSignIn={() => {
+          setAuthMode("signin");
+          setShowAuth(true);
+        }}
         onOrderNow={() => setShowSubscription(true)}
       />
       <Hero onOrderNow={() => setShowSubscription(true)} />
@@ -41,7 +59,11 @@ function App() {
       <Footer />
 
       {/* Modals */}
-      <AuthModal isOpen={showAuth} onClose={() => setShowAuth(false)} />
+      <AuthModal
+        isOpen={showAuth}
+        onClose={() => setShowAuth(false)}
+        initialMode={authMode}
+      />
       <SubscriptionModal
         isOpen={showSubscription}
         onClose={() => setShowSubscription(false)}
