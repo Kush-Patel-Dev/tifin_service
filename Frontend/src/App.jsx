@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase/firebase";
+import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Features from "./components/Features/Features";
@@ -20,18 +18,6 @@ function App() {
   const [authMode, setAuthMode] = useState("signin");
   const [showSubscription, setShowSubscription] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
-  // Listen for auth state changes
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("User logged in:", user.email || user.displayName);
-      } else {
-        console.log("User logged out");
-      }
-    });
-    return () => unsubscribe();
-  }, []);
 
   const handleOrderSuccess = () => {
     setShowToast(true);

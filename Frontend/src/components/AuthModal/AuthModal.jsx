@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { auth, googleProvider } from "../../firebase/firebase";
 import "./AuthModal.css";
@@ -17,12 +18,19 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [googleUser, setGoogleUser] = useState(null);
+  const [showpassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
       setError("");
+      // Clear all form fields when modal opens
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+      setShowPassword(false);
     }
   }, [isOpen, initialMode]);
 
@@ -34,6 +42,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
     setLastName("");
     setPhone("");
     setError("");
+    setShowPassword(false);
   }, [mode]);
 
   if (!isOpen) return null;
@@ -51,6 +60,11 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           email,
           password,
         );
+        // Set displayName to first + last name so the header shows the user's name
+        const fullName = `${firstName} ${lastName}`.trim();
+        if (fullName) {
+          await updateProfile(userCredential.user, { displayName: fullName });
+        }
         console.log("Sign Up successful:", userCredential.user);
       } else {
         // Sign In with Email & Password
@@ -99,14 +113,6 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       console.log("Google Sign In successful:", user);
-
-      // Store Google user information
-      setGoogleUser({
-        displayName: user.displayName,
-        email: user.email,
-        photoURL: user.photoURL,
-        uid: user.uid,
-      });
 
       onClose();
     } catch (err) {
@@ -216,14 +222,33 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
 
               <div className="form-group">
                 <label className="form-label">Password</label>
-                <input
-                  className="form-input"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    className="form-input"
+                    type={showpassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    onClick={() => setShowPassword(!showpassword)}
+                    style={{
+                      position: "absolute",
+                      right: "12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                      fontSize: "1.1rem",
+                      color: "#999",
+                      userSelect: "none",
+                    }}
+                  >
+                    <i
+                      className={`bi ${showpassword ? "bi-eye-slash" : "bi-eye"}`}
+                    ></i>
+                  </span>
+                </div>
               </div>
 
               {mode === "signup" && (
@@ -262,58 +287,6 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                 <i className="bi bi-google"></i>
                 Continue with Google
               </button>
-
-              {googleUser && (
-                <div
-                  className="google-user-info"
-                  style={{
-                    marginTop: "16px",
-                    padding: "12px",
-                    background: "rgba(66, 133, 244, 0.1)",
-                    border: "1px solid rgba(66, 133, 244, 0.3)",
-                    borderRadius: "8px",
-                    textAlign: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "12px",
-                    }}
-                  >
-                    {googleUser.photoURL && (
-                      <img
-                        src={googleUser.photoURL}
-                        alt="Profile"
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "50%",
-                        }}
-                      />
-                    )}
-                    <div>
-                      <div style={{ fontWeight: "bold", color: "#4285f4" }}>
-                        {googleUser.displayName}
-                      </div>
-                      <div style={{ fontSize: "0.85rem", color: "#666" }}>
-                        {googleUser.email}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: "0.75rem",
-                          color: "#999",
-                          marginTop: "4px",
-                        }}
-                      >
-                        Google ID: {googleUser.uid}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               <p className="auth-footer-text">
                 {mode === "signin" ? (
