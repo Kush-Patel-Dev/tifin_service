@@ -1,15 +1,128 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
+import { auth, googleProvider } from "../../firebase/firebase";
 import "./AuthModal.css";
 
-const AuthModal = ({ isOpen, onClose }) => {
-  const [mode, setMode] = useState("signin");
+const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
+  const [mode, setMode] = useState(initialMode);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showpassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setMode(initialMode);
+      setError("");
+      // Clear all form fields when modal opens
+      setEmail("");
+      setPassword("");
+      setFirstName("");
+      setLastName("");
+      setPhone("");
+      setShowPassword(false);
+    }
+  }, [isOpen, initialMode]);
+
+  // Reset form fields when switching tabs
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+    setFirstName("");
+    setLastName("");
+    setPhone("");
+    setError("");
+    setShowPassword(false);
+  }, [mode]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onClose();
+    setError("");
+    setLoading(true);
+
+    try {
+      if (mode === "signup") {
+        // Sign Up with Email & Password
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        // Set displayName to first + last name so the header shows the user's name
+        const fullName = `${firstName} ${lastName}`.trim();
+        if (fullName) {
+          await updateProfile(userCredential.user, { displayName: fullName });
+        }
+        console.log("Sign Up successful:", userCredential.user);
+      } else {
+        // Sign In with Email & Password
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
+        console.log("Sign In successful:", userCredential.user);
+      }
+      onClose();
+    } catch (err) {
+      console.error("Auth error:", err.message);
+      // User-friendly error messages
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          setError("This email is already registered. Try signing in.");
+          break;
+        case "auth/invalid-email":
+          setError("Please enter a valid email address.");
+          break;
+        case "auth/weak-password":
+          setError("Password should be at least 6 characters.");
+          break;
+        case "auth/user-not-found":
+          setError("No account found with this email.");
+          break;
+        case "auth/wrong-password":
+          setError("Incorrect password. Please try again.");
+          break;
+        case "auth/invalid-credential":
+          setError("Invalid email or password.");
+          break;
+        default:
+          setError(err.message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google Sign In successful:", user);
+
+      onClose();
+    } catch (err) {
+      console.error("Google Auth error:", err.message);
+      if (err.code !== "auth/popup-closed-by-user") {
+        setError("Google sign in failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -51,6 +164,24 @@ const AuthModal = ({ isOpen, onClose }) => {
               </button>
             </div>
 
+            {error && (
+              <div
+                className="auth-error"
+                style={{
+                  color: "#ff6b6b",
+                  background: "rgba(255, 107, 107, 0.1)",
+                  border: "1px solid rgba(255, 107, 107, 0.3)",
+                  padding: "10px 14px",
+                  borderRadius: "8px",
+                  fontSize: "0.85rem",
+                  marginBottom: "16px",
+                  textAlign: "center",
+                }}
+              >
+                {error}
+              </div>
+            )}
+
             <form className="auth-form" onSubmit={handleSubmit}>
               {mode === "signup" && (
                 <div className="form-row">
@@ -60,6 +191,8 @@ const AuthModal = ({ isOpen, onClose }) => {
                       className="form-input"
                       type="text"
                       placeholder="Priya"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
                   </div>
                   <div className="form-group">
@@ -68,6 +201,8 @@ const AuthModal = ({ isOpen, onClose }) => {
                       className="form-input"
                       type="text"
                       placeholder="Sharma"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
                 </div>
@@ -79,16 +214,41 @@ const AuthModal = ({ isOpen, onClose }) => {
                   className="form-input"
                   type="email"
                   placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
 
               <div className="form-group">
                 <label className="form-label">Password</label>
-                <input
-                  className="form-input"
-                  type="password"
-                  placeholder="••••••••"
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    className="form-input"
+                    type={showpassword ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <span
+                    onClick={() => setShowPassword(!showpassword)}
+                    style={{
+                      position: "absolute",
+                      right: "12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                      fontSize: "1.1rem",
+                      color: "#999",
+                      userSelect: "none",
+                    }}
+                  >
+                    <i
+                      className={`bi ${showpassword ? "bi-eye-slash" : "bi-eye"}`}
+                    ></i>
+                  </span>
+                </div>
               </div>
 
               {mode === "signup" && (
@@ -98,17 +258,32 @@ const AuthModal = ({ isOpen, onClose }) => {
                     className="form-input"
                     type="tel"
                     placeholder="+91 XXXXX XXXXX"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
               )}
 
-              <button type="submit" className="btn-auth-submit">
-                {mode === "signin" ? "Sign In" : "Create Account"}
+              <button
+                type="submit"
+                className="btn-auth-submit"
+                disabled={loading}
+              >
+                {loading
+                  ? "Please wait..."
+                  : mode === "signin"
+                    ? "Sign In"
+                    : "Create Account"}
               </button>
 
               <div className="auth-divider">or</div>
 
-              <button type="button" className="btn-google">
+              <button
+                type="button"
+                className="btn-google"
+                onClick={handleGoogleSignIn}
+                disabled={loading}
+              >
                 <i className="bi bi-google"></i>
                 Continue with Google
               </button>

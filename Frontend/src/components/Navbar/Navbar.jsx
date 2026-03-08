@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import DarkMode from '../DarkMode/DarkMode';
+import { useAuth } from '../../context/AuthContext';
+import { getNameFromEmail } from '../../utils/nameHelper';
 import './Navbar.css';
 
 const navItems = [
@@ -14,6 +16,7 @@ const navItems = [
 const Navbar = ({ onSignIn, onOrderNow }) => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -28,6 +31,14 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     setMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (err) {
+      console.error("Logout failed:", err.message);
+    }
   };
 
   return (
@@ -53,7 +64,14 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
           </ul>
 
           <div className="nav-actions">
-            <button className="btn-sign-in" onClick={onSignIn}>Sign In</button>
+            {user ? (
+              <>
+                <span className="user-greeting">Hi, {user.displayName || getNameFromEmail(user.email)}</span>
+                <button className="btn-sign-in" onClick={handleLogout}>Logout</button>
+              </>
+            ) : (
+              <button className="btn-sign-in" onClick={onSignIn}>Sign In</button>
+            )}
             <button className="btn-order-now" onClick={onOrderNow}>Order Now</button>
           </div>
         </div>

@@ -76,15 +76,44 @@
   color: var(--warm-gray);
   font-weight: 500;
   font-size: 0.92rem;
-  padding: 6px 14px;
+  padding: 8px 20px;
   background: none;
-  border: none;
+  border: 1.5px solid var(--warm-gray);
+  border-radius: 50px;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: all 0.2s;
 }
 
 .btn-sign-in:hover {
   color: var(--saffron);
+  border-color: var(--saffron);
+}
+
+.user-greeting {
+  color: var(--warm-gray);
+  font-weight: 500;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.btn-logout {
+  color: #ff6b6b;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 6px 14px;
+  background: none;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: #ff6b6b;
 }
 
 .btn-order-now {
@@ -216,6 +245,19 @@
 
 [data-theme="dark"] .btn-sign-in:hover {
   color: var(--saffron);
+}
+
+[data-theme="dark"] .user-greeting {
+  color: var(--warm-gray);
+}
+
+[data-theme="dark"] .btn-logout {
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.25);
+}
+
+[data-theme="dark"] .btn-logout:hover {
+  background: rgba(255, 107, 107, 0.15);
 }
 
 @media (max-width: 992px) {

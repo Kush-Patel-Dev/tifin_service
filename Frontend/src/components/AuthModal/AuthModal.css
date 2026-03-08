@@ -170,3 +170,7 @@
 [data-theme="dark"] .auth-tab {
   color: var(--saffron);
 }
+
+[data-theme="dark"] .auth-tab.active {
+  color: #fff;
+}

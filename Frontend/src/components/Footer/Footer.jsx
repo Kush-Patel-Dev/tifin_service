@@ -58,7 +58,7 @@ const Footer = () => {
             <h6>Contact</h6>
             <a href="tel:+919876543210">
               <i className="bi bi-telephone" style={{ marginRight: '8px' }}></i>
-              +91 98765 43210
+              +91 99248 94483
             </a>
             <a href="mailto:hello@tiffinbox.in">
               <i className="bi bi-envelope" style={{ marginRight: '8px' }}></i>
@@ -66,13 +66,13 @@ const Footer = () => {
             </a>
             <a href="#">
               <i className="bi bi-geo-alt" style={{ marginRight: '8px' }}></i>
-              Serving Ahmedabad, Surat & Rajkot
+              Serving Bhavnagar, Gujarat
             </a>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <span>© 2025 TiffinBox. All rights reserved.</span>
+          <span>© 2026 TiffinBox. All rights reserved.</span>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
