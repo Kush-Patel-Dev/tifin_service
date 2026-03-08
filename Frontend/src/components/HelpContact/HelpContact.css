@@ -166,3 +166,23 @@
     gap: 36px;
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .faq-item {
+  background: #1a1a2e;
+  border-color: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .contact-form {
+  background: #1a1a2e;
+  border-color: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .contact-info-card {
+  background: #1a1a2e;
+  border-color: rgba(232, 133, 26, 0.08);
+}
+
+[data-theme="dark"] .contact-info-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}

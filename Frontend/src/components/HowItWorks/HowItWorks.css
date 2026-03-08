@@ -74,3 +74,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .how-section {
+  background: #16213e;
+}

@@ -243,3 +243,50 @@ input, select, textarea {
     border-width: 1.5px;
   }
 }
+
+/* ===== Dark Mode Global Overrides ===== */
+[data-theme="dark"] .btn-outline {
+  border-color: var(--deep);
+  color: var(--deep);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: var(--deep);
+  color: #121220;
+}
+
+[data-theme="dark"] .modal-content {
+  background: #1a1a2e;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .form-input {
+  background: #16213e;
+  border-color: #2a2a4a;
+  color: var(--deep);
+}
+
+[data-theme="dark"] .form-input::placeholder {
+  color: #6b6580;
+}
+
+[data-theme="dark"] .form-input:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(232, 133, 26, 0.2);
+}
+
+[data-theme="dark"] .form-label {
+  color: var(--deep);
+}
+
+[data-theme="dark"] .toast {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .section-tag {
+  color: var(--saffron);
+}
+
+[data-theme="dark"] .modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}

@@ -145,3 +145,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .auth-modal-body {
+  background: #1a1a2e;
+}
+
+[data-theme="dark"] .auth-divider::before,
+[data-theme="dark"] .auth-divider::after {
+  background: #2a2a4a;
+}
+
+[data-theme="dark"] .btn-google {
+  background: #16213e;
+  border-color: #2a2a4a;
+  color: var(--deep);
+}
+
+[data-theme="dark"] .btn-google:hover {
+  border-color: var(--saffron);
+  background: #1a1a2e;
+}
+
+[data-theme="dark"] .auth-tab {
+  color: var(--saffron);
+}

@@ -62,3 +62,16 @@
   border-color: #fff;
   background: rgba(255,255,255,0.1);
 }
+
+/* ===== Dark Mode ===== */
+[data-theme="dark"] .btn-cta-white {
+  background: #fff;
+  color: var(--saffron-dark);
+}
+
+[data-theme="dark"] .btn-cta-white:hover {
+  background: #1a1a2e;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}

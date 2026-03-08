@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import DarkMode from '../DarkMode/DarkMode';
 import './Navbar.css';
 
 const navItems = [
@@ -36,16 +37,6 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
           Tiffin<span>Box</span>
         </a>
 
-        <button
-          className={`hamburger${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
         <div className={`nav-center${menuOpen ? ' open' : ''}`}>
           <ul className="nav-links">
             {navItems.map((item) => (
@@ -65,6 +56,19 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
             <button className="btn-sign-in" onClick={onSignIn}>Sign In</button>
             <button className="btn-order-now" onClick={onOrderNow}>Order Now</button>
           </div>
+        </div>
+
+        <div className="navbar-right">
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <DarkMode />
         </div>
       </div>
     </nav>
