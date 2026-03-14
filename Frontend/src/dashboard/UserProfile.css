@@ -1,0 +1,435 @@
+/* UserProfile Styles */
+.profile-container {
+  width: 100%;
+}
+
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-card {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border: 1px solid rgba(232, 133, 26, 0.12);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  width: min(400px, 92vw); /* balanced average width for better UI */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 520px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar svg {
+  font-size: 6rem;
+  color: var(--saffron);
+  opacity: 0.8;
+}
+
+.profile-name {
+  color: var(--deep);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.profile-subtitle {
+  color: var(--warm-gray);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.profile-details {
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(232, 133, 26, 0.1);
+  border-radius: 12px;
+}
+
+.detail-item label {
+  display: block;
+  color: var(--warm-gray);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.detail-item span {
+  color: var(--deep);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.profile-actions {
+  text-align: center;
+  margin-top: auto; /* push actions to bottom */
+}
+
+.btn-edit-profile {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #1a1208;
+  border: none;
+  border-radius: 50px;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  height: 44px; /* consistent height */
+}
+
+.btn-edit-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .profile-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
+  border-color: rgba(232, 133, 26, 0.2);
+}
+
+[data-theme="dark"] .detail-item {
+  background: rgba(10, 10, 15, 0.5);
+  border-color: rgba(232, 133, 26, 0.15);
+}
+
+/* Edit mode styles - keep same card/detail look but with inputs */
+.edit-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.edit-form .form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form .form-row label {
+  color: var(--warm-gray);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.edit-form .form-row input {
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(232, 133, 26, 0.06);
+  color: var(--deep);
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.edit-form .form-row input:focus {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+/* Also apply to inputs placed directly inside .detail-item (edit mode) */
+.detail-item .edit-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(232, 133, 26, 0.06);
+  color: var(--deep);
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.detail-item .edit-input:focus {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.profile-actions .btn-save-profile,
+.profile-actions .btn-cancel-profile {
+  border: none;
+  border-radius: 50px;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  height: 44px;
+}
+
+.profile-actions .btn-save-profile {
+  /* match primary look by default */
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #1a1208;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.profile-actions .btn-cancel-profile {
+  background: transparent;
+  color: var(--warm-gray);
+  border: 1px solid rgba(232, 133, 26, 0.08);
+}
+
+.profile-actions .btn-save-profile:hover,
+.profile-actions .btn-cancel-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+/* Status message styles reused from contact form */
+.status-message {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.status-message.error {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.18);
+}
+
+.status-message.success {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.06);
+  border: 1px solid rgba(74, 222, 128, 0.12);
+}
+
+/* Component uses global dashboard header/main styles from DashboardLayout.css */
+
+.mobile-menu-btn {
+  background: none;
+  border: 1px solid rgba(232, 133, 26, 0.2);
+  border-radius: 8px;
+  color: var(--warm-gray);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: none;
+}
+
+.mobile-menu-btn:hover {
+  color: var(--saffron);
+  border-color: var(--saffron);
+}
+
+.dashboard-title {
+  color: var(--deep);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-content {
+  padding: 24px;
+  width: min(760px, 92vw);
+  margin: 0 auto;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* ensure container fills viewport for vertical centering */
+  padding: 24px 0;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-avatar svg {
+  font-size: 6rem;
+  color: var(--saffron);
+  opacity: 0.8;
+}
+
+.profile-name {
+  color: var(--deep);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.profile-subtitle {
+  color: var(--warm-gray);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.profile-details {
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(232, 133, 26, 0.1);
+  border-radius: 12px;
+}
+
+.detail-item label {
+  display: block;
+  color: var(--warm-gray);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.detail-item span {
+  color: var(--deep);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.profile-actions {
+  text-align: center;
+  margin-top: auto; /* ensure actions stay at bottom */
+}
+
+.btn-edit-profile {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #1a1208;
+  border: none;
+  border-radius: 50px;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  height: 44px;
+}
+
+.btn-edit-profile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+/* Loading State */
+.dashboard-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Mobile Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  /* Desktop layout handled centrally in DashboardLayout.css */
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  .sidebar-close {
+    display: none;
+  }
+
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  .profile-content {
+    padding: 1rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* Dark Theme Specific Overrides */
+[data-theme="dark"] .dashboard-container {
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+}
+
+[data-theme="dark"] .dashboard-sidebar {
+  background: linear-gradient(180deg, #1a1a2e 0%, #0a0a0f 100%);
+}
+
+[data-theme="dark"] .profile-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
+  border-color: rgba(232, 133, 26, 0.2);
+}
+
+[data-theme="dark"] .detail-item {
+  background: rgba(10, 10, 15, 0.5);
+  border-color: rgba(232, 133, 26, 0.15);
+}
