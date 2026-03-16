@@ -1,5 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createDefaultAdmin } from "./firebase/firebase";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import Features from "./components/Features/Features";
@@ -19,6 +20,14 @@ import DashboardLayout from "./dashboard/DashboardLayout";
 import UserProfile from "./dashboard/UserProfile";
 import MyApplications from "./dashboard/MyApplications";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import AdminLayout from "./dashboard/admin/AdminLayout";
+import AdminDashboard from "./dashboard/admin/AdminDashboard";
+import UsersList from "./dashboard/admin/UsersList";
+import InquiryList from "./dashboard/admin/InquiryList";
+import SubscriptionList from "./dashboard/admin/SubscriptionList";
+import MealManager from "./dashboard/admin/MealManager";
+import CsvExport from "./dashboard/admin/CsvExport";
+import About from "./dashboard/admin/About";
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -28,14 +37,20 @@ function App() {
     showToast("success", "Subscription confirmed! We'll contact you shortly.");
   };
 
+  useEffect(() => {
+    // Ensure default admin exists in Firestore on first app load
+    createDefaultAdmin().catch((err) => console.error(err));
+  }, []);
+
   return (
     <>
-      {/** Hide main Navbar for dashboard routes to avoid duplicate navbars */}
+      {/** Hide main Navbar for dashboard and admin routes to avoid duplicate navbars */}
       {(() => {
         const location = useLocation();
         const isDashboard = location.pathname.startsWith("/dashboard");
+        const isAdmin = location.pathname.startsWith("/admin");
         return (
-          !isDashboard && (
+          !isDashboard && !isAdmin && (
             <Navbar
               onSignIn={() => {
                 setAuthMode("signin");
@@ -70,6 +85,16 @@ function App() {
           <Route path="my-applications" element={<MyApplications />} />
         </Route>
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/about" element={<About />} />
+
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<UsersList />} />
+          <Route path="inquiries" element={<InquiryList />} />
+          <Route path="subscriptions" element={<SubscriptionList />} />
+          <Route path="meals" element={<MealManager />} />
+          <Route path="csv" element={<CsvExport />} />
+        </Route>
       </Routes>
 
       {/* Modals */}

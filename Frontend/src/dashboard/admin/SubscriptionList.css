@@ -1,0 +1,91 @@
+.subscription-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.subscription-search {
+  flex: 1;
+  max-width: 300px;
+  position: relative;
+}
+
+.subscription-search input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background-color: var(--admin-bg);
+  color: var(--admin-text-main);
+  outline: none;
+  font-family: inherit;
+  transition: var(--admin-transition);
+}
+
+.subscription-search input:focus {
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
+}
+
+.subscription-search svg {
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-text-muted);
+}
+
+.subscription-filters {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background: var(--admin-bg);
+  color: var(--admin-text-muted);
+  cursor: pointer;
+  transition: var(--admin-transition);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.filter-btn.active {
+  background: var(--admin-accent);
+  color: white;
+  border-color: var(--admin-accent);
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: var(--admin-card-bg);
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-card-title {
+  font-size: 0.9rem;
+  color: var(--admin-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.stat-card-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--admin-text-main);
+}

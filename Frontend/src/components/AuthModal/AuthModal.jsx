@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleProvider, db } from "../../firebase/firebase";
 import { showToast } from "../../utils/toastService";
 import "./AuthModal.css";
@@ -23,6 +23,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showpassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -100,6 +101,42 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           showToast("success", "Login Successful! Welcome back.");
         } catch (e) {
           // noop - don't break auth flow if toast fails
+        }
+
+        // Role-based redirect: check admin doc and navigate accordingly
+        try {
+          const adminRef = doc(db, "admin", "main_admin");
+          const adminSnap = await getDoc(adminRef);
+          const adminEmailRaw =
+            adminSnap && adminSnap.exists() ? adminSnap.data().email : null;
+          const adminEmail = adminEmailRaw
+            ? String(adminEmailRaw).toLowerCase().trim()
+            : null;
+          const userEmail =
+            userCredential.user && userCredential.user.email
+              ? String(userCredential.user.email).toLowerCase().trim()
+              : null;
+          console.log(
+            "Admin email (firestore):",
+            adminEmail,
+            "Signed-in email:",
+            userEmail,
+          );
+          if (adminEmail && userEmail && userEmail === adminEmail) {
+            navigate("/admin/dashboard");
+          } else {
+            navigate("/");
+          }
+        } catch (redirErr) {
+          console.warn(
+            "Admin lookup failed, defaulting to landing page",
+            redirErr,
+          );
+          try {
+            navigate("/");
+          } catch (navErr) {
+            console.warn("Navigation failed:", navErr);
+          }
         }
       }
       onClose();
@@ -194,6 +231,40 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
       }
 
       console.log("Google Sign In successful:", user);
+
+      // Role-based redirect for Google sign-in
+      try {
+        const adminRef = doc(db, "admin", "main_admin");
+        const adminSnap = await getDoc(adminRef);
+        const adminEmailRaw =
+          adminSnap && adminSnap.exists() ? adminSnap.data().email : null;
+        const adminEmail = adminEmailRaw
+          ? String(adminEmailRaw).toLowerCase().trim()
+          : null;
+        const userEmail =
+          user && user.email ? String(user.email).toLowerCase().trim() : null;
+        console.log(
+          "Admin email (firestore):",
+          adminEmail,
+          "Google user email:",
+          userEmail,
+        );
+        if (adminEmail && userEmail && userEmail === adminEmail) {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/");
+        }
+      } catch (redirErr) {
+        console.warn(
+          "Admin lookup failed after Google sign-in, defaulting to landing page",
+          redirErr,
+        );
+        try {
+          navigate("/");
+        } catch (navErr) {
+          console.warn("Navigation failed:", navErr);
+        }
+      }
 
       onClose();
     } catch (err) {

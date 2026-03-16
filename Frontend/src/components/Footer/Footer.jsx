@@ -41,22 +41,22 @@ const Footer = () => {
             <a href="#plans">Daily Plan</a>
             <a href="#plans">Weekly Plan</a>
             <a href="#plans">Monthly Plan</a>
-            <a href="#">Custom Plan</a>
-            <a href="#">Corporate Plans</a>
+            <a href="#plans">Custom Plan</a>
+            <a href="#plans">Corporate Plans</a>
           </div>
 
           <div className="footer-col">
             <h6>Support</h6>
             <a href="#help">FAQ</a>
-            <a href="#">Track Order</a>
-            <a href="#">Cancel/Pause</a>
-            <a href="#">Refund Policy</a>
+            <a href="#help">Track Order</a>
+            <a href="#help">Cancel/Pause</a>
+            <a href="#help">Refund Policy</a>
             <a href="#help">Contact Us</a>
           </div>
 
           <div className="footer-col">
             <h6>Contact</h6>
-            <a href="tel:+919876543210">
+            <a href="tel:+919924894483">
               <i className="bi bi-telephone" style={{ marginRight: '8px' }}></i>
               +91 99248 94483
             </a>

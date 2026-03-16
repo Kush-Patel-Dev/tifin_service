@@ -152,6 +152,16 @@
     max-width: 400px;
     margin: 0 auto;
   }
+
+  .tiffin-card-name,
+  .tiffin-card-desc {
+    text-align: center;
+  }
+
+  .tiffin-nutrition,
+  .tiffin-ingredients {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {

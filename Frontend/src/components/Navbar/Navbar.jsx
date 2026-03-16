@@ -83,6 +83,9 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 <Link to="/dashboard/profile" className="btn-profile">
                   Profile
                 </Link>
+                <Link to="/about" className="btn-profile">
+                  About
+                </Link>
                 <button className="btn-sign-in" onClick={handleLogout}>
                   Logout
                 </button>
