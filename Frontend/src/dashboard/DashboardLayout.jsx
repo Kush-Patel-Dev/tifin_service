@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, Outlet } from "react-router-dom";
 import {
   FaBars,
@@ -8,11 +8,16 @@ import {
   FaHome,
 } from "react-icons/fa";
 import "./DashboardLayout.css";
+import { useAuth } from "../context/AuthContext";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
 const DashboardLayout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -26,13 +31,39 @@ const DashboardLayout = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
+  useEffect(() => {
+    let mounted = true;
+    const checkAdmin = async () => {
+      try {
+        if (!user || !user.email) return;
+        const adminRef = doc(db, "admin", "main_admin");
+        const snap = await getDoc(adminRef);
+        if (!mounted) return;
+        const adminEmail =
+          snap && snap.exists()
+            ? String(snap.data().email).toLowerCase().trim()
+            : null;
+        const userEmail = String(user.email).toLowerCase().trim();
+        setIsAdmin(!!(adminEmail && userEmail === adminEmail));
+      } catch (e) {
+        console.warn("Could not determine admin status", e);
+      }
+    };
+    checkAdmin();
+    return () => (mounted = false);
+  }, [user]);
+
   const sidebarItems = [
     { path: "/dashboard/profile", label: "Profile", icon: FaUser },
-    {
-      path: "/dashboard/my-applications",
-      label: "My Applications",
-      icon: FaClipboardList,
-    },
+    ...(!isAdmin
+      ? [
+          {
+            path: "/dashboard/my-applications",
+            label: "My Applications",
+            icon: FaClipboardList,
+          },
+        ]
+      : []),
   ];
 
   return (

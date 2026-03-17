@@ -60,10 +60,22 @@
   background: none;
   border: none;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-link:visited,
+.nav-link:active,
+.nav-link:focus {
+  color: var(--warm-gray);
 }
 
 .nav-link:hover {
   color: var(--saffron);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid rgba(232, 133, 26, 0.6);
+  outline-offset: 2px;
 }
 
 .nav-actions {
@@ -146,7 +158,7 @@
   font-size: 0.88rem;
   letter-spacing: 0.03em;
   transition:
-    background 0.2s,
+background 0.2s,
     transform 0.15s;
   cursor: pointer;
 }
@@ -249,7 +261,7 @@
 
 /* ===== Dark Mode ===== */
 [data-theme="dark"] .navbar {
-  background: rgba(18, 18, 32, 0.95);
+  background: #121220;
   border-bottom-color: rgba(232, 133, 26, 0.1);
 }
 
@@ -284,7 +296,7 @@
 
 @media (max-width: 992px) {
   [data-theme="dark"] .nav-center {
-    background: rgba(18, 18, 32, 0.98);
+    background: #121220;
   }
 
   [data-theme="dark"] .nav-link:hover {
