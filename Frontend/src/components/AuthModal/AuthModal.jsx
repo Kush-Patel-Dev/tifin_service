@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import {
   createUserWithEmailAndPassword,
@@ -6,7 +8,9 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { auth, googleProvider } from "../../firebase/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, googleProvider, db } from "../../firebase/firebase";
+import { showToast } from "../../utils/toastService";
 import "./AuthModal.css";
 
 const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
@@ -65,6 +69,23 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
         if (fullName) {
           await updateProfile(userCredential.user, { displayName: fullName });
         }
+
+        // Save user profile data to Firestore
+        try {
+          await setDoc(doc(db, "users", userCredential.user.uid), {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            phone: phone,
+            createdAt: new Date().toISOString(),
+          });
+        } catch (dbErr) {
+          console.warn(
+            "Could not save to Firestore (likely missing database or permissions), but Auth succeeded.",
+            dbErr,
+          );
+        }
+
         console.log("Sign Up successful:", userCredential.user);
       } else {
         // Sign In with Email & Password
@@ -74,6 +95,12 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           password,
         );
         console.log("Sign In successful:", userCredential.user);
+        // Show success toast (login)
+        try {
+          showToast("success", "Login Successful! Welcome back.");
+        } catch (e) {
+          // noop - don't break auth flow if toast fails
+        }
       }
       onClose();
     } catch (err) {
@@ -99,7 +126,35 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           setError("Invalid email or password.");
           break;
         default:
-          setError(err.message);
+          if (
+            err.code === "permission-denied" ||
+            (err.message && err.message.includes("permission"))
+          ) {
+            setError(
+              "Firestore error: Missing permissions. Please enable Firestore Database in the Firebase Console and update Security Rules to allow writes.",
+            );
+          } else {
+            setError(err.message);
+          }
+      }
+
+      // For sign-in failures show a generic invalid credentials toast only
+      // for credential-related errors so we don't surface toasts for other
+      // flows (e.g., permission issues) or when a user simply isn't logged in.
+      if (mode === "signin") {
+        const credentialErrors = new Set([
+          "auth/wrong-password",
+          "auth/user-not-found",
+          "auth/invalid-credential",
+        ]);
+        const code = err && err.code;
+        if (credentialErrors.has(code)) {
+          try {
+            showToast("error", "Invalid email or password. Please try again.");
+          } catch (e) {
+            // noop
+          }
+        }
       }
     } finally {
       setLoading(false);
@@ -112,13 +167,50 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
+
+      // For Google Sign In, split displayName into firstName and lastName if possible
+      const names = user.displayName ? user.displayName.split(" ") : ["", ""];
+      const gFirstName = names[0];
+      const gLastName = names.slice(1).join(" ");
+
+      // Save user profile data to Firestore (using merge: true so we don't overwrite if they already exist)
+      try {
+        await setDoc(
+          doc(db, "users", user.uid),
+          {
+            firstName: gFirstName,
+            lastName: gLastName,
+            email: user.email,
+            phone: user.phoneNumber || "",
+            createdAt: new Date().toISOString(), // Or serverTimestamp()
+          },
+          { merge: true },
+        );
+      } catch (dbErr) {
+        console.warn(
+          "Could not save to Firestore (likely missing database or permissions), but Google Auth succeeded.",
+          dbErr,
+        );
+      }
+
       console.log("Google Sign In successful:", user);
 
       onClose();
     } catch (err) {
-      console.error("Google Auth error:", err.message);
+      console.error("Google Auth error:", err);
       if (err.code !== "auth/popup-closed-by-user") {
-        setError("Google sign in failed. Please try again.");
+        if (
+          err.code === "permission-denied" ||
+          (err.message && err.message.includes("permission"))
+        ) {
+          setError(
+            "Firestore error: Missing permissions. Please enable Firestore Database in the Firebase Console and update Security Rules to allow writes.",
+          );
+        } else {
+          setError(
+            `Google sign in failed: ${err.message || err.code || "Unknown error"}`,
+          );
+        }
       }
     } finally {
       setLoading(false);
@@ -249,6 +341,17 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                     ></i>
                   </span>
                 </div>
+                {mode === "signin" && (
+                  <div style={{ textAlign: "right", marginTop: "6px" }}>
+                    <Link
+                      to="/forgot-password"
+                      onClick={onClose}
+                      style={{ color: "var(--saffron)", fontSize: "0.9rem" }}
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                )}
               </div>
 
               {mode === "signup" && (

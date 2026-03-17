@@ -1,0 +1,27 @@
+:root {
+  /* Safe fallbacks for text/background to prevent invisible text in production */
+  --text-color: #111111;
+  --bg-color: var(--cream, #fdf6ec);
+  --nav-link-gap-fallback: 20px;
+}
+
+/* Dark theme fallbacks (project uses data-theme="dark") */
+[data-theme="dark"] {
+  --text-color: #ffffff;
+  --bg-color: #0f1724;
+}
+
+/* Apply safe global text/background using variables so components inherit readable colors */
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/* Non-destructive fallback for nav spacing: only used if component CSS doesn't define gap */
+/* This selector uses low specificity so it won't override explicit rules in component CSS, but
+   ensures spacing if component CSS fails to load. */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-link-gap-fallback);
+}

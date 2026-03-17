@@ -1,3 +1,4 @@
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
@@ -12,37 +13,64 @@ import HelpContact from "./components/HelpContact/HelpContact";
 import Footer from "./components/Footer/Footer";
 import AuthModal from "./components/AuthModal/AuthModal";
 import SubscriptionModal from "./components/SubscriptionModal/SubscriptionModal";
+import ToastAlert from "./components/ToastAlert/ToastAlert";
+import { showToast } from "./utils/toastService";
+import DashboardLayout from "./dashboard/DashboardLayout";
+import UserProfile from "./dashboard/UserProfile";
+import MyApplications from "./dashboard/MyApplications";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 
 function App() {
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState("signin");
   const [showSubscription, setShowSubscription] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-
   const handleOrderSuccess = () => {
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 4000);
+    showToast("success", "Subscription confirmed! We'll contact you shortly.");
   };
 
   return (
     <>
-      <Navbar
-        onSignIn={() => {
-          setAuthMode("signin");
-          setShowAuth(true);
-        }}
-        onOrderNow={() => setShowSubscription(true)}
-      />
-      <Hero onOrderNow={() => setShowSubscription(true)} />
-      <Features />
-      <MealPlans onOrderNow={() => setShowSubscription(true)} />
-      <MenuPreview />
-      <HowItWorks />
-      <Testimonials />
-      <TiffinDetails onOrderNow={() => setShowSubscription(true)} />
-      <CallToAction onOrderNow={() => setShowSubscription(true)} />
-      <HelpContact />
-      <Footer />
+      {/** Hide main Navbar for dashboard routes to avoid duplicate navbars */}
+      {(() => {
+        const location = useLocation();
+        const isDashboard = location.pathname.startsWith("/dashboard");
+        return (
+          !isDashboard && (
+            <Navbar
+              onSignIn={() => {
+                setAuthMode("signin");
+                setShowAuth(true);
+              }}
+              onOrderNow={() => setShowSubscription(true)}
+            />
+          )
+        );
+      })()}
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero onOrderNow={() => setShowSubscription(true)} />
+              <Features />
+              <MealPlans onOrderNow={() => setShowSubscription(true)} />
+              <MenuPreview />
+              <HowItWorks />
+              <Testimonials />
+              <TiffinDetails onOrderNow={() => setShowSubscription(true)} />
+              <CallToAction onOrderNow={() => setShowSubscription(true)} />
+              <HelpContact />
+              <Footer />
+            </>
+          }
+        />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="my-applications" element={<MyApplications />} />
+        </Route>
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+      </Routes>
 
       {/* Modals */}
       <AuthModal
@@ -56,12 +84,8 @@ function App() {
         onSuccess={handleOrderSuccess}
       />
 
-      {/* Success Toast */}
-      {showToast && (
-        <div className="toast">
-          🎉 Subscription confirmed! We'll contact you shortly.
-        </div>
-      )}
+      {/* Global Toasts */}
+      <ToastAlert />
     </>
   );
 }

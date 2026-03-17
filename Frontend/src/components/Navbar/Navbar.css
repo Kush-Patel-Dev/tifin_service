@@ -1,7 +1,7 @@
 .navbar {
-  background: rgba(253,246,236,0.95);
+  background: rgba(253, 246, 236, 0.95);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(232,133,26,0.15);
+  border-bottom: 1px solid rgba(232, 133, 26, 0.15);
   padding: 14px 0;
   position: sticky;
   top: 0;
@@ -10,7 +10,7 @@
 }
 
 .navbar.scrolled {
-  box-shadow: 0 4px 30px rgba(232,133,26,0.12);
+  box-shadow: 0 4px 30px rgba(232, 133, 26, 0.12);
 }
 
 .navbar-inner {
@@ -116,6 +116,26 @@
   border-color: #ff6b6b;
 }
 
+.btn-profile {
+  color: var(--deep);
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 8px 16px;
+  background: none;
+  border: 1.5px solid var(--deep);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-profile:hover {
+  color: var(--saffron);
+  border-color: var(--saffron);
+  background: rgba(232, 133, 26, 0.05);
+}
+
 .btn-order-now {
   background: var(--saffron);
   color: #fff;
@@ -125,7 +145,9 @@
   font-weight: 600;
   font-size: 0.88rem;
   letter-spacing: 0.03em;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
   cursor: pointer;
 }
 
@@ -183,12 +205,12 @@
     top: 60px;
     left: 0;
     right: 0;
-    background: rgba(253,246,236,0.98);
+    background: rgba(253, 246, 236, 0.98);
     backdrop-filter: blur(12px);
     padding: 20px;
     flex-direction: column;
     gap: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transform: translateY(-120%);
     transition: transform 0.3s ease;
     z-index: 999;
@@ -211,13 +233,13 @@
   }
 
   .nav-link:hover {
-    background: rgba(232,133,26,0.08);
+    background: rgba(232, 133, 26, 0.08);
   }
 
   .nav-actions {
     width: 100%;
     padding-top: 12px;
-    border-top: 1px solid rgba(232,133,26,0.15);
+    border-top: 1px solid rgba(232, 133, 26, 0.15);
     display: flex;
     flex-direction: column;
     justify-content: center;
