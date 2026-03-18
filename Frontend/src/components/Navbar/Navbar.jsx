@@ -54,7 +54,6 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
 
           <div className="nav-actions">
             <button className="btn-sign-in" onClick={onSignIn}>Sign In</button>
-            <button className="btn-order-now" onClick={onOrderNow}>Order Now</button>
           </div>
         </div>
 
