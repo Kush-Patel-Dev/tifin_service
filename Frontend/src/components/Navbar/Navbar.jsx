@@ -95,9 +95,6 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 Sign In
               </button>
             )}
-            <button className="btn-order-now" onClick={onOrderNow}>
-              Order Now
-            </button>
           </div>
         </div>
 

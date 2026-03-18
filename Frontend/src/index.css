@@ -189,7 +189,6 @@ input, select, textarea {
   from { transform: translateX(120%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
-
 /* Form styles */
 .form-group {
   margin-bottom: 16px;
