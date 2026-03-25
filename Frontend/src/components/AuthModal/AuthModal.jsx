@@ -7,6 +7,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
+  sendEmailVerification,
+  signOut,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleProvider, db } from "../../firebase/firebase";
@@ -36,7 +38,16 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
       setLastName("");
       setPhone("");
       setShowPassword(false);
+
+      // Prevent scrolling
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
     }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen, initialMode]);
 
   // Reset form fields when switching tabs
@@ -59,6 +70,14 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
 
     try {
       if (mode === "signup") {
+        // Email Validation Regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        if (!email || !emailRegex.test(email)) {
+          setError("Please enter a valid email address.");
+          setLoading(false);
+          return;
+        }
+
         // Sign Up with Email & Password
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -88,6 +107,16 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
         }
 
         console.log("Sign Up successful:", userCredential.user);
+
+        // Send verification email
+        await sendEmailVerification(userCredential.user);
+        showToast(
+          "success",
+          "Verification link sent. Please verify your email before login.",
+        );
+        setMode("signin"); // Switch to signin mode after signup
+        setLoading(false);
+        return; // Don't proceed to login flow yet
       } else {
         // Sign In with Email & Password
         const userCredential = await signInWithEmailAndPassword(
@@ -95,7 +124,32 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           email,
           password,
         );
+
+        const userEmail =
+          userCredential.user && userCredential.user.email
+            ? String(userCredential.user.email).toLowerCase().trim()
+            : null;
+
+        /**
+         * ADMIN BYPASS LOGIC:
+         * If the static admin email is detected, skip the email verification check.
+         * This ensures the developer can always access the dashboard.
+         */
+        if (userEmail === "admin@gmail.com") {
+          console.log("Admin login detected: bypassing email verification.");
+        } else {
+          // Regular User: Enforce email verification check
+          if (!userCredential.user.emailVerified) {
+            setError("Please verify your email address. We sent a link to your inbox.");
+            showToast("error", "Verification required to log in.");
+            await signOut(auth);
+            setLoading(false);
+            return;
+          }
+        }
+
         console.log("Sign In successful:", userCredential.user);
+        
         // Show success toast (login)
         try {
           showToast("success", "Login Successful! Welcome back.");
@@ -103,7 +157,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           // noop - don't break auth flow if toast fails
         }
 
-        // Role-based redirect: check admin doc and navigate accordingly
+        // Role-based redirect
         try {
           const adminRef = doc(db, "admin", "main_admin");
           const adminSnap = await getDoc(adminRef);
@@ -112,17 +166,8 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
           const adminEmail = adminEmailRaw
             ? String(adminEmailRaw).toLowerCase().trim()
             : null;
-          const userEmail =
-            userCredential.user && userCredential.user.email
-              ? String(userCredential.user.email).toLowerCase().trim()
-              : null;
-          console.log(
-            "Admin email (firestore):",
-            adminEmail,
-            "Signed-in email:",
-            userEmail,
-          );
-          if (adminEmail && userEmail && userEmail === adminEmail) {
+
+          if (userEmail === "admin@gmail.com" || (adminEmail && userEmail === adminEmail)) {
             navigate("/admin/dashboard");
           } else {
             navigate("/");
@@ -295,7 +340,6 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={onClose}
       >
         <motion.div
           className="modal-content"
@@ -307,7 +351,13 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
         >
           <div className="auth-modal-header">
             <h3>🍱 {mode === "signin" ? "Welcome Back!" : "Join TiffinBox"}</h3>
-            <button className="auth-close" onClick={onClose}>
+            <button
+              className="auth-close"
+              onClick={() => {
+                navigate("/");
+                onClose();
+              }}
+            >
               ×
             </button>
           </div>
@@ -353,7 +403,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                     <input
                       className="form-input"
                       type="text"
-                      placeholder="Priya"
+                      placeholder="First Name"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                     />
@@ -363,7 +413,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                     <input
                       className="form-input"
                       type="text"
-                      placeholder="Sharma"
+                      placeholder="Last Name"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
@@ -376,7 +426,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                 <input
                   className="form-input"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder="Email Address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -389,7 +439,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                   <input
                     className="form-input"
                     type={showpassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -431,7 +481,7 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }) => {
                   <input
                     className="form-input"
                     type="tel"
-                    placeholder="+91 XXXXX XXXXX"
+                    placeholder="Phone Number"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />

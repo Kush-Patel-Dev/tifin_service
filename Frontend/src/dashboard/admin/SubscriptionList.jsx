@@ -338,7 +338,6 @@ const SubscriptionList = () => {
                <label style={{display: 'block', marginBottom: '0.5rem', fontSize: '0.85rem'}}>Meal Type</label>
                <select className="admin-input" required name="mealType" value={formData.mealType} onChange={(e) => setFormData({...formData, mealType: e.target.value})}>
                  <option value="veg">Veg</option>
-                 <option value="non-veg">Non-Veg</option>
                  <option value="mix">Mix</option>
                </select>
 

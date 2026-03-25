@@ -1,9 +1,10 @@
+import { FaSun, FaCalendarDay, FaCalendarAlt, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import './MealPlans.css';
 
 const plans = [
   {
-    icon: '☀️',
+    icon: <FaSun />,
     name: 'Daily Plan',
     desc: 'Perfect for trying us out',
     price: '120',
@@ -20,7 +21,7 @@ const plans = [
     ],
   },
   {
-    icon: '📅',
+    icon: <FaCalendarDay />,
     name: 'Weekly Plan',
     desc: 'Best value for regulars',
     price: '799',
@@ -37,7 +38,7 @@ const plans = [
     ],
   },
   {
-    icon: '🗓️',
+    icon: <FaCalendarAlt />,
     name: 'Monthly Plan',
     desc: 'Maximum savings & convenience',
     price: '2,499',
@@ -79,7 +80,7 @@ const MealPlans = ({ onOrderNow }) => {
                 <div className={`plan-card h-100${plan.featured ? ' featured' : ''}`}>
                   {plan.badge && <div className="plan-badge">{plan.badge}</div>}
                   <div className="plan-header">
-                    <div className="plan-icon">{plan.icon}</div>
+                    <div className="plan-icon-box">{plan.icon}</div>
                     <div className="plan-name">{plan.name}</div>
                     <div className="plan-desc">{plan.desc}</div>
                   </div>
@@ -90,16 +91,20 @@ const MealPlans = ({ onOrderNow }) => {
                   <div className="plan-features">
                     {plan.features.map((f, j) => (
                       <div className="plan-feature-item" key={j}>
-                        <i className={`bi ${f.included ? 'bi-check-circle-fill' : 'bi-x-circle excluded'}`}></i>
-                        {f.text}
+                        {f.included ? (
+                          <FaCheckCircle className="icon-included" />
+                        ) : (
+                          <FaTimesCircle className="icon-excluded" />
+                        )}
+                        <span>{f.text}</span>
                       </div>
                     ))}
                   </div>
                   <button
                     className={`btn-plan${plan.featured ? ' active' : ''}`}
-                    onClick={onOrderNow}
+                    onClick={() => onOrderNow(`${plan.name} — ₹${plan.price}/${plan.period.replace('per ', '')}`)}
                   >
-                    {plan.buttonText}
+                    <span className="btn-text">{plan.buttonText}</span>
                   </button>
                 </div>
               </ScrollReveal>

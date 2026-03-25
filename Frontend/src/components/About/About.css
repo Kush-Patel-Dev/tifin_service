@@ -1,0 +1,70 @@
+.about-section {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+[data-theme="dark"] .about-section {
+  background: #1c2541; /* Distinct darker navy compared to the cream background of reviews */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-card {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 24px;
+  border-left: 6px solid var(--leaf);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about-title {
+  color: var(--saffron);
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.about-text {
+  color: var(--warm-gray);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Dark Mode Enhancements */
+[data-theme="dark"] .about-card {
+  border-left-color: var(--saffron);
+  background: #1a1a2e;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .about-text {
+  color: #a0a0a0;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    padding: 60px 0;
+  }
+  
+  .about-card {
+    padding: 30px 20px;
+  }
+  
+  .about-title {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+  
+  .about-text {
+    font-size: 1.05rem;
+  }
+}

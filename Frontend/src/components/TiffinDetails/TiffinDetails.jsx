@@ -1,9 +1,11 @@
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import './TiffinDetails.css';
 
+import paneerThali from "../../assets/paneerthali.jpg";
+
 const tiffins = [
   {
-    icon: '🍛',
+    image: "/images/meals/it1.png",
     name: 'Classic Indian Thali',
     desc: 'A complete traditional meal with dal, sabzi, roti, rice, pickles, and papad. Perfectly balanced and deeply satisfying.',
     type: 'Veg',
@@ -12,7 +14,7 @@ const tiffins = [
     ingredients: ['Toor Dal', 'Basmati Rice', 'Wheat Roti', 'Seasonal Sabzi', 'Pickle', 'Papad'],
   },
   {
-    icon: '🥘',
+    image: paneerThali,
     name: 'Premium Paneer Thali',
     desc: 'Rich paneer curry with butter naan, jeera rice, raita, and gulab jamun dessert. A premium dining experience.',
     type: 'Premium',
@@ -21,7 +23,7 @@ const tiffins = [
     ingredients: ['Paneer', 'Butter Naan', 'Jeera Rice', 'Raita', 'Gulab Jamun', 'Salad'],
   },
   {
-    icon: '🥗',
+    image: "/images/meals/bowl.png",
     name: 'Healthy Fit Bowl',
     desc: 'Low-carb, high-protein meal with grilled veggies, quinoa, hummus, and mixed greens. Perfect for fitness enthusiasts.',
     type: 'Low-Carb',
@@ -55,7 +57,7 @@ const TiffinDetails = ({ onOrderNow }) => {
               <div className="tiffin-card">
                 <div className="tiffin-card-img">
                   <div className="tiffin-type-badge">{t.type}</div>
-                  {t.icon}
+                  <img src={t.image} alt={t.name} className="tiffin-image-shape" />
                 </div>
                 <div className="tiffin-card-body">
                   <div className="tiffin-card-name">{t.name}</div>
@@ -103,3 +105,4 @@ const TiffinDetails = ({ onOrderNow }) => {
 };
 
 export default TiffinDetails;
+

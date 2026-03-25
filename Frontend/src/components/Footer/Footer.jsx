@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div className="footer-brand">TiffinBox</div>
+            <div className="footer-brand">Food <span>Box</span></div>
             <p className="footer-desc">
               Fresh, hygienic, and home-style meals delivered to your doorstep every day.
               Nourish your body, simplify your life.
@@ -60,9 +60,9 @@ const Footer = () => {
               <i className="bi bi-telephone" style={{ marginRight: '8px' }}></i>
               +91 99248 94483
             </a>
-            <a href="mailto:hello@tiffinbox.in">
+            <a href="mailto:foodbox@gmail.com">
               <i className="bi bi-envelope" style={{ marginRight: '8px' }}></i>
-              hello@tiffinbox.in
+              foodbox@gmail.com
             </a>
             <a href="#">
               <i className="bi bi-geo-alt" style={{ marginRight: '8px' }}></i>
@@ -72,7 +72,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 TiffinBox. All rights reserved.</span>
+          <span>© 2026 FoodBox. All rights reserved.</span>
           <div className="footer-bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

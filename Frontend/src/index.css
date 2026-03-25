@@ -220,6 +220,21 @@ input, select, textarea {
   box-shadow: 0 0 0 3px rgba(232,133,26,0.15);
 }
 
+.form-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: var(--calendar-filter, brightness(0));
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.form-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+[data-theme="dark"] .form-input::-webkit-calendar-picker-indicator {
+  --calendar-filter: brightness(0) invert(1);
+}
+
 .form-input::placeholder {
   color: #b5a99a;
 }

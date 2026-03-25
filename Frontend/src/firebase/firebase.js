@@ -2,12 +2,13 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+const firebase = {
   apiKey: "AIzaSyBuKqzk5zkwODASeEIVMtG2zrCDga7xczg",
   authDomain: "tiffin-service-a021d.firebaseapp.com",
   projectId: "tiffin-service-a021d",
@@ -17,7 +18,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebase);
 
 // Initialize Authentication
 export const auth = getAuth(app);
@@ -25,6 +26,9 @@ export const googleProvider = new GoogleAuthProvider();
 
 // Initialize Firestore
 export const db = getFirestore(app);
+
+// Initialize Storage
+export const storage = getStorage(app);
 
 /**
  * Create a default admin document in the top-level `admin` collection.

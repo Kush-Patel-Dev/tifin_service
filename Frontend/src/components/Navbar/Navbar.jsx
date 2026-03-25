@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 import DarkMode from "../DarkMode/DarkMode";
 import { useAuth } from "../../context/AuthContext";
 import { getNameFromEmail } from "../../utils/nameHelper";
@@ -7,6 +8,7 @@ import "./Navbar.css";
 
 const navItems = [
   { label: "Why Us", href: "#features" },
+  { label: "About", href: "#about" },
   { label: "Meal Plans", href: "#plans" },
   { label: "Menu", href: "#menu" },
   { label: "How It Works", href: "#how" },
@@ -36,10 +38,12 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
   };
 
   const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (err) {
-      console.error("Logout failed:", err.message);
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        await logout();
+      } catch (err) {
+        console.error("Logout failed:", err.message);
+      }
     }
   };
 
@@ -50,7 +54,7 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
     <nav className={`navbar${scrolled ? " scrolled" : ""}`} id="mainNav">
       <div className="container navbar-inner">
         <Link className="brand-logo" to="/">
-          Tiffin<span>Box</span>
+          Food <span>Box</span>
         </Link>
 
         <div className={`nav-center${menuOpen ? " open" : ""}`}>
@@ -83,11 +87,12 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 <Link to="/dashboard/profile" className="btn-profile">
                   Profile
                 </Link>
-                <Link to="/about" className="btn-profile">
-                  About
-                </Link>
-                <button className="btn-sign-in" onClick={handleLogout}>
-                  Logout
+                <button 
+                  className="btn-sign-in" 
+                  onClick={handleLogout}
+                  style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+                >
+                  <FiLogOut /> Logout
                 </button>
               </>
             ) : (
@@ -95,9 +100,6 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 Sign In
               </button>
             )}
-            <button className="btn-order-now" onClick={onOrderNow}>
-              Order Now
-            </button>
           </div>
         </div>
 
