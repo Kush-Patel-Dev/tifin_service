@@ -13,7 +13,7 @@
   background: var(--card-bg);
   padding: 40px;
   border-radius: 24px;
-  border-left: 6px solid var(--leaf);
+  border-left: 6px solid var(--saffron);
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
 }
@@ -54,16 +54,16 @@
   .about-section {
     padding: 60px 0;
   }
-  
+
   .about-card {
     padding: 30px 20px;
   }
-  
+
   .about-title {
     font-size: 1.8rem;
     margin-bottom: 16px;
   }
-  
+
   .about-text {
     font-size: 1.05rem;
   }

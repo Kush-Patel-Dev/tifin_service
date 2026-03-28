@@ -118,7 +118,7 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.25s;
-  cursor: default;
+  cursor: pointer;
   text-decoration: none !important;
 }
 
@@ -137,7 +137,7 @@
   font-weight: 600;
   font-size: 0.95rem;
   transition: all 0.25s;
-  cursor: default;
+  cursor: pointer;
   text-decoration: none !important;
 }
 

@@ -1,4 +1,4 @@
-import './Footer.css';
+import "./Footer.css";
 
 const Footer = () => {
   return (
@@ -6,10 +6,12 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div>
-            <div className="footer-brand">Food <span>Box</span></div>
+            <div className="footer-brand">
+              Food <span>Box</span>
+            </div>
             <p className="footer-desc">
-              Fresh, hygienic, and home-style meals delivered to your doorstep every day.
-              Nourish your body, simplify your life.
+              Fresh, hygienic, and home-style meals delivered to your doorstep
+              every day. Nourish your body, simplify your life.
             </p>
             <div className="social-links">
               <a href="#" className="social-btn" aria-label="Instagram">
@@ -57,15 +59,15 @@ const Footer = () => {
           <div className="footer-col">
             <h6>Contact</h6>
             <a href="tel:+919924894483">
-              <i className="bi bi-telephone" style={{ marginRight: '8px' }}></i>
+              <i className="bi bi-telephone" style={{ marginRight: "8px" }}></i>
               +91 99248 94483
             </a>
             <a href="mailto:foodbox@gmail.com">
-              <i className="bi bi-envelope" style={{ marginRight: '8px' }}></i>
-              foodbox@gmail.com
+              <i className="bi bi-envelope" style={{ marginRight: "8px" }}></i>
+              foodbox1404@gmail.com
             </a>
             <a href="#">
-              <i className="bi bi-geo-alt" style={{ marginRight: '8px' }}></i>
+              <i className="bi bi-geo-alt" style={{ marginRight: "8px" }}></i>
               Serving Bhavnagar, Gujarat
             </a>
           </div>

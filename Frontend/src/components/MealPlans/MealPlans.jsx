@@ -85,7 +85,10 @@ const MealPlans = ({ onOrderNow }) => {
                     <div className="plan-desc">{plan.desc}</div>
                   </div>
                   <div className="plan-price-wrap">
-                    <span className="plan-price"><sup>₹</sup>{plan.price}</span>
+                    <div className="plan-price-row">
+                      <span className="plan-currency">₹</span>
+                      <span className="plan-price">{plan.price}</span>
+                    </div>
                     <span className="plan-period">{plan.period}</span>
                   </div>
                   <div className="plan-features">

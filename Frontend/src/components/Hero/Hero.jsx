@@ -47,12 +47,12 @@ const Hero = () => {
               — just wholesome food.
             </motion.p>
             <motion.div className="hero-actions" variants={itemVariants}>
-              <div className="btn-primary">
+              <a href="#plans" className="btn-primary">
                 Explore Meal Plans
-              </div>
-              <div className="btn-outline">
+              </a>
+              <a href="#menu" className="btn-outline">
                 View Today's Menu
-              </div>
+              </a>
             </motion.div>
             <motion.div className="hero-stats" variants={itemVariants}>
               <div className="stat-item">
