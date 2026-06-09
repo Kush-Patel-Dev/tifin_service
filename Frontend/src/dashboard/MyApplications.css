@@ -28,11 +28,11 @@
 }
 
 .application-card {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border: 1px solid rgba(232, 133, 26, 0.15);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -146,10 +146,10 @@
 
 .special-instructions span {
   display: block;
-  background: rgba(15, 23, 42, 0.5);
+  background: var(--cream);
   padding: 0.75rem;
   border-radius: 8px;
-  border: 1px solid rgba(232, 133, 26, 0.1);
+  border: 1px solid var(--border-light);
   /* match other detail spans (normal font style) */
   font-style: normal;
   color: var(--deep);
@@ -159,12 +159,12 @@
 
 /* Empty State */
 .empty-state {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border: 1px solid rgba(232, 133, 26, 0.15);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 3rem 2rem;
   text-align: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-icon {
@@ -224,11 +224,13 @@
 [data-theme="dark"] .application-card {
   background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
   border-color: rgba(232, 133, 26, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 133, 26, 0.08);
 }
 
 [data-theme="dark"] .empty-state {
   background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
   border-color: rgba(232, 133, 26, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 133, 26, 0.08);
 }
 
 [data-theme="dark"] .special-instructions span {
@@ -357,12 +359,12 @@
 }
 
 .empty-state {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  border: 1px solid rgba(232, 133, 26, 0.15);
+  background: var(--card-bg);
+  border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 3rem 2rem;
   text-align: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .empty-icon {
@@ -477,4 +479,5 @@
 [data-theme="dark"] .empty-state {
   background: linear-gradient(135deg, #1a1a2e 0%, #2d3748 100%);
   border-color: rgba(232, 133, 26, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(232, 133, 26, 0.08);
 }

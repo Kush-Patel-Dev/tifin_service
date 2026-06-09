@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createDefaultAdmin } from "./firebase/firebase";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,6 +8,7 @@ import MealPlans from "./components/MealPlans/MealPlans";
 import MenuPreview from "./components/MenuPreview/MenuPreview";
 import HowItWorks from "./components/HowItWorks/HowItWorks";
 import Testimonials from "./components/Testimonials/Testimonials";
+import About from "./components/About/About";
 import TiffinDetails from "./components/TiffinDetails/TiffinDetails";
 import CallToAction from "./components/CallToAction/CallToAction";
 import HelpContact from "./components/HelpContact/HelpContact";
@@ -27,14 +28,21 @@ import InquiryList from "./dashboard/admin/InquiryList";
 import SubscriptionList from "./dashboard/admin/SubscriptionList";
 import MealManager from "./dashboard/admin/MealManager";
 import CsvExport from "./dashboard/admin/CsvExport";
-import About from "./dashboard/admin/About";
+import AdminAbout from "./dashboard/admin/About";
 
 function App() {
+  const navigate = useNavigate();
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState("signin");
   const [showSubscription, setShowSubscription] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const handleOrderSuccess = () => {
     showToast("success", "Subscription confirmed! We'll contact you shortly.");
+  };
+
+  const handleOpenSubscription = (planName = null) => {
+    setSelectedPlan(planName);
+    setShowSubscription(true);
   };
 
   useEffect(() => {
@@ -56,7 +64,7 @@ function App() {
                 setAuthMode("signin");
                 setShowAuth(true);
               }}
-              onOrderNow={() => setShowSubscription(true)}
+              onOrderNow={() => handleOpenSubscription()}
             />
           )
         );
@@ -67,14 +75,15 @@ function App() {
           path="/"
           element={
             <>
-              <Hero onOrderNow={() => setShowSubscription(true)} />
+              <Hero onOrderNow={() => handleOpenSubscription()} />
               <Features />
-              <MealPlans onOrderNow={() => setShowSubscription(true)} />
+              <MealPlans onOrderNow={handleOpenSubscription} />
               <MenuPreview />
               <HowItWorks />
+              <About />
               <Testimonials />
-              <TiffinDetails onOrderNow={() => setShowSubscription(true)} />
-              <CallToAction onOrderNow={() => setShowSubscription(true)} />
+              <TiffinDetails onOrderNow={() => handleOpenSubscription()} />
+              <CallToAction onOrderNow={() => handleOpenSubscription()} />
               <HelpContact />
               <Footer />
             </>
@@ -85,7 +94,7 @@ function App() {
           <Route path="my-applications" element={<MyApplications />} />
         </Route>
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about-admin" element={<AdminAbout />} />
 
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<AdminDashboard />} />
@@ -107,6 +116,7 @@ function App() {
         isOpen={showSubscription}
         onClose={() => setShowSubscription(false)}
         onSuccess={handleOrderSuccess}
+        initialPlan={selectedPlan}
       />
 
       {/* Global Toasts */}

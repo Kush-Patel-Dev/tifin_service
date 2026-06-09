@@ -22,17 +22,30 @@
 }
 
 .brand-logo {
-  font-family: var(--font-heading);
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: var(--saffron);
-  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   text-decoration: none;
+  color: inherit;
   cursor: pointer;
 }
 
-.brand-logo span {
-  color: var(--deep);
+.brand-logo-img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.5px;
+}
+
+.brand-logo-text span {
+  color: var(--saffron);
 }
 
 .nav-center {
@@ -93,7 +106,7 @@
   border: 1.5px solid var(--warm-gray);
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-sign-in:hover {
@@ -112,7 +125,7 @@
 }
 
 .btn-logout {
-  color: #ff6b6b;
+  color: #ef4444;
   font-weight: 500;
   font-size: 0.92rem;
   padding: 6px 14px;
@@ -120,7 +133,7 @@
   border: 1px solid rgba(255, 107, 107, 0.3);
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-logout:hover {
@@ -137,7 +150,7 @@
   border: 1.5px solid var(--deep);
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
   display: inline-block;
 }
@@ -245,7 +258,7 @@ background 0.2s,
   }
 
   .nav-link:hover {
-    background: rgba(232, 133, 26, 0.08);
+    background: #ffffff;
   }
 
   .nav-actions {
@@ -267,6 +280,22 @@ background 0.2s,
 
 [data-theme="dark"] .navbar.scrolled {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .brand-logo-text {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .brand-logo-text span {
+  color: var(--saffron);
+}
+
+/* Support for SVG text color if used inline */
+.logo-text {
+  fill: #1a1a2e;
+}
+[data-theme="dark"] .logo-text {
+  fill: #ffffff;
 }
 
 [data-theme="dark"] .hamburger span {
@@ -291,7 +320,7 @@ background 0.2s,
 }
 
 [data-theme="dark"] .btn-logout:hover {
-  background: rgba(255, 107, 107, 0.15);
+  background: #fef2f2;
 }
 
 @media (max-width: 992px) {
@@ -306,4 +335,99 @@ background 0.2s,
   [data-theme="dark"] .nav-actions {
     border-top-color: rgba(232, 133, 26, 0.1);
   }
+}
+
+/* Logout button exactly imitating the provided red card design */
+.btn-logout-card {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 107, 107, 0.08);
+  color: #ff6b6b;
+  border-radius: 14px;
+  border: 1px solid #fecaca;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.btn-logout-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 107, 107, 0.15);
+  border-color: #fca5a5;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+}
+
+.btn-logout-card svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+}
+
+
+[data-theme="dark"] .btn-logout-card {
+  background: #362929;
+  border-color: transparent;
+  color: #ff6b6b;
+}
+
+[data-theme="dark"] .btn-logout-card:hover {
+  background: #423232;
+}
+
+/* Profile button card taking exactly the same card shape, but with Saffron tint */
+.btn-profile-card {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(232, 133, 26, 0.08);
+  color: var(--saffron);
+  border-radius: 14px;
+  border: 1px solid #ffe8cc;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.btn-profile-card:hover {
+  transform: translateY(-2px);
+  background: #fff4e6;
+  border-color: #ffd8a8;
+  box-shadow: 0 4px 12px rgba(232, 133, 26, 0.15);
+}
+
+.btn-profile-card svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.5;
+}
+
+[data-theme="dark"] .btn-profile-card {
+  background: rgba(232, 133, 26, 0.15);
+  border-color: transparent;
+  color: var(--saffron);
+}
+
+[data-theme="dark"] .btn-profile-card:hover {
+  background: rgba(232, 133, 26, 0.25);
+}
+
+/* Theme-based Logo Switching */
+.brand-logo-img.logo-dark {
+  display: none;
+}
+
+[data-theme="dark"] .brand-logo-img.logo-light {
+  display: none;
+}
+
+[data-theme="dark"] .brand-logo-img.logo-dark {
+  display: block;
 }

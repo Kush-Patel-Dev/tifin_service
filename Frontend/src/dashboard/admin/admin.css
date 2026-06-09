@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 /* --- ADMIN THEME VARIABLES --- */
 :root {
@@ -10,15 +10,17 @@
   --admin-border: #e2e8f0;
   --admin-accent: #ff7a00;
   --admin-accent-hover: #e06a00;
-  --admin-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-  --admin-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --admin-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --admin-shadow-hover:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   --admin-glass-bg: rgba(255, 255, 255, 0.7);
   --admin-sidebar-bg: #ffffff;
   --admin-radius: 16px;
   --admin-transition: all 0.3s ease-in-out;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --admin-bg: #0f172a;
   --admin-card-bg: #1e293b;
   --admin-text-main: #ffffff;
@@ -32,7 +34,7 @@
 
 /* --- BASE STYLES --- */
 .admin-container {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: var(--admin-bg);
   color: var(--admin-text-main);
   min-height: 100vh;
@@ -386,8 +388,12 @@
   gap: 0.25rem;
   margin-top: 0.5rem;
 }
-.admin-stat-indicator.positive { color: #22c55e; }
-.admin-stat-indicator.negative { color: #ef4444; }
+.admin-stat-indicator.positive {
+  color: #22c55e;
+}
+.admin-stat-indicator.negative {
+  color: #ef4444;
+}
 
 /* --- TABLES --- */
 .admin-table-wrapper {
@@ -418,7 +424,7 @@
 }
 .admin-table tbody tr:hover {
   background-color: var(--admin-bg);
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
 }
 
 .badge {
@@ -427,15 +433,18 @@
   font-size: 0.75rem;
   font-weight: 600;
 }
-.badge-active, .badge-green {
+.badge-active,
+.badge-green {
   background: rgba(34, 197, 94, 0.1);
   color: #22c55e;
 }
-.badge-expired, .badge-red {
+.badge-expired,
+.badge-red {
   background: rgba(239, 68, 68, 0.1);
   color: #ef4444;
 }
-.badge-pending, .badge-orange {
+.badge-pending,
+.badge-orange {
   background: rgba(245, 158, 11, 0.1);
   color: #f59e0b;
 }
@@ -449,12 +458,24 @@
   margin-right: 0.5rem;
   transition: var(--admin-transition);
 }
-.admin-action-btn.edit { color: #3b82f6; }
-.admin-action-btn.edit:hover { background: rgba(59, 130, 246, 0.1); }
-.admin-action-btn.delete { color: #ef4444; }
-.admin-action-btn.delete:hover { background: rgba(239, 68, 68, 0.1); }
-.admin-action-btn.restrict { color: #f59e0b; }
-.admin-action-btn.restrict:hover { background: rgba(245, 158, 11, 0.1); }
+.admin-action-btn.edit {
+  color: #3b82f6;
+}
+.admin-action-btn.edit:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+.admin-action-btn.delete {
+  color: #ef4444;
+}
+.admin-action-btn.delete:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+.admin-action-btn.restrict {
+  color: #f59e0b;
+}
+.admin-action-btn.restrict:hover {
+  background: rgba(245, 158, 11, 0.1);
+}
 
 /* --- BUTTONS --- */
 .admin-btn {
@@ -474,6 +495,38 @@
   background: var(--admin-accent-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(255, 122, 0, 0.3);
+}
+
+.admin-btn-add {
+  background: linear-gradient(135deg, #ff9d42 0%, #ff7a00 100%);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2);
+  letter-spacing: 0.02em;
+}
+
+.admin-btn-add:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 122, 0, 0.4);
+  background: linear-gradient(135deg, #ffa857 0%, #ff851a 100%);
+}
+
+.admin-btn-add:active {
+  transform: translateY(-1px);
+}
+
+.admin-btn-add svg {
+  font-size: 1.2rem;
+  stroke-width: 2.5px;
 }
 .admin-btn-outline {
   background: transparent;
@@ -503,6 +556,21 @@
   box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.2);
 }
 
+.admin-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: var(--calendar-filter, brightness(0));
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.admin-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+[data-theme="dark"] .admin-input::-webkit-calendar-picker-indicator {
+  --calendar-filter: brightness(0) invert(1);
+}
+
 /* Theme Toggle Slider */
 .theme-switch {
   position: relative;
@@ -518,9 +586,12 @@
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
 }
 .slider:before {
   position: absolute;
@@ -530,7 +601,7 @@
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 input:checked + .slider {
   background-color: var(--admin-accent);
@@ -569,7 +640,7 @@ input:checked + .slider:before {
   .admin-grid-4 {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .admin-grid-2 {
     grid-template-columns: 1fr;
   }
@@ -680,7 +751,7 @@ input:checked + .slider:before {
   .admin-stat-card {
     padding: 1rem;
   }
-  
+
   .admin-stat-icon {
     width: 50px;
     height: 50px;

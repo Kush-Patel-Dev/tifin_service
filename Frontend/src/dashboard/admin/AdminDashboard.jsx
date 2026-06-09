@@ -183,7 +183,7 @@ const AdminDashboard = () => {
         <div className="admin-card admin-stat-card">
           <div className="admin-stat-icon" style={{color: '#3b82f6', background: 'rgba(59,130,246,0.1)'}}><FiDollarSign /></div>
           <div className="admin-stat-info">
-            <h4>${stats.revenue}</h4>
+            <h4>₹{stats.revenue}</h4>
             <p>Est. Monthly Revenue</p>
             <span className="admin-stat-indicator positive">Live Data</span>
           </div>

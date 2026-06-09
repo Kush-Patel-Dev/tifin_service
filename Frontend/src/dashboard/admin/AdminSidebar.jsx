@@ -20,11 +20,13 @@ const AdminSidebar = ({ collapsed, toggleSidebar }) => {
   ];
 
   const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      navigate('/');
-    } catch (error) {
-      console.error("Logout Error:", error);
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        await signOut(auth);
+        navigate('/');
+      } catch (error) {
+        console.error("Logout Error:", error);
+      }
     }
   };
 
@@ -41,7 +43,7 @@ const AdminSidebar = ({ collapsed, toggleSidebar }) => {
           <FiMenu />
         </button>
         <span className="admin-sidebar-logo-text">
-          <span style={{ color: '#ff7a00' }}>Tiffin</span> 
+          <span style={{ color: '#ff7a00' }}>FoodBox</span> 
           <span style={{ marginLeft: '5px' }}>Admin</span>
         </span>
       </div>
@@ -67,7 +69,7 @@ const AdminSidebar = ({ collapsed, toggleSidebar }) => {
             handleLinkClick();
           }}
           className="admin-menu-item" 
-          style={{ width: '100%', color: '#ef4444' }}
+          style={{ width: '100%', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px' }}
         >
           <FiLogOut />
           <span className="admin-menu-text">Log Out</span>

@@ -1,30 +1,32 @@
+import { FaCalendarCheck, FaTags, FaFire } from 'react-icons/fa';
+import DeliveryIcon from './DeliveryIcon';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import './HowItWorks.css';
 
 const steps = [
   {
-    num: 1,
+    num: '01',
+    icon: <FaCalendarCheck />,
     title: 'Choose Your Plan',
     desc: 'Browse daily, weekly, or monthly subscription options that suit your needs.',
-    showConnector: true,
   },
   {
-    num: 2,
+    num: '02',
+    icon: <FaTags />,
     title: 'Customize Menu',
     desc: 'Select your preferred dishes or let our chefs surprise you with daily specials.',
-    showConnector: true,
   },
   {
-    num: 3,
+    num: '03',
+    icon: <FaFire />,
     title: 'We Cook Fresh',
     desc: 'Our chefs prepare your meals fresh each morning using quality ingredients.',
-    showConnector: true,
   },
   {
-    num: 4,
+    num: '04',
+    icon: <DeliveryIcon size={32} />,
     title: 'Delivered Hot',
     desc: 'Your tiffin is packed hygienically and delivered on time to your address.',
-    showConnector: false,
   },
 ];
 
@@ -45,14 +47,15 @@ const HowItWorks = () => {
             </p>
           </ScrollReveal>
         </div>
-        <div className="steps-grid">
+
+        <div className="how-unique-grid">
           {steps.map((step, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="step-card">
-                {step.showConnector && <div className="step-connector"></div>}
-                <div className="step-number">{step.num}</div>
-                <div className="step-title">{step.title}</div>
-                <div className="step-desc">{step.desc}</div>
+            <ScrollReveal key={i} delay={i * 0.15}>
+              <div className="how-unique-card">
+                <div className="how-bg-number">{step.num}</div>
+                {step.icon && <div className="how-icon-box">{step.icon}</div>}
+                <h4 className="how-step-title">{step.title}</h4>
+                <p className="how-step-desc">{step.desc}</p>
               </div>
             </ScrollReveal>
           ))}

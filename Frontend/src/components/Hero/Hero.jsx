@@ -1,5 +1,7 @@
+import hero from "/images/meals/hero1.png";
 import { motion } from "framer-motion";
 import "./Hero.css";
+
 
 const containerVariants = {
   hidden: {},
@@ -13,7 +15,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const Hero = ({ onOrderNow }) => {
+const Hero = () => {
   return (
     <section className="hero" id="home">
       <div className="hero-bg-pattern"></div>
@@ -28,8 +30,8 @@ const Hero = ({ onOrderNow }) => {
             animate="visible"
           >
             <motion.div className="hero-badge" variants={itemVariants}>
-              🍱 Fresh · Hygienic · Homestyle
-              <div>🚚 Get instant services</div>
+              <span>🍱FRESH &middot; HYGIENIC &middot; HOMESTYLE</span>
+              <span>🚚 GET INSTANT SERVICES</span>
             </motion.div>
 
             <motion.h1 variants={itemVariants}>
@@ -45,28 +47,10 @@ const Hero = ({ onOrderNow }) => {
               — just wholesome food.
             </motion.p>
             <motion.div className="hero-actions" variants={itemVariants}>
-              <a
-                href="#plans"
-                className="btn-primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .querySelector("#plans")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
+              <a href="#plans" className="btn-primary">
                 Explore Meal Plans
               </a>
-              <a
-                href="#menu"
-                className="btn-outline"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document
-                    .querySelector("#menu")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
+              <a href="#menu" className="btn-outline">
                 View Today's Menu
               </a>
             </motion.div>
@@ -93,12 +77,12 @@ const Hero = ({ onOrderNow }) => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="hero-image-wrap">
-              <div className="hero-main-img">🍛</div>
+              <img src={hero} alt="Delicious Meal" className="hero-main-img" style={{ objectFit: 'cover' }} />
               <div className="hero-food-card">
                 <div className="food-card-icon">🕐</div>
                 <div>
                   <div className="food-card-title">Lunch Delivery</div>
-                  <div className="food-card-sub">Ready by 12:30 PM</div>
+                  <div className="food-card-sub">Ready by 12:00 PM</div>
                 </div>
               </div>
               <div className="hero-rating-card">

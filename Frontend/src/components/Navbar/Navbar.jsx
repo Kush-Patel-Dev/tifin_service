@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FiLogOut, FiUser } from "react-icons/fi";
 import DarkMode from "../DarkMode/DarkMode";
 import { useAuth } from "../../context/AuthContext";
 import { getNameFromEmail } from "../../utils/nameHelper";
@@ -10,6 +11,7 @@ const navItems = [
   { label: "Meal Plans", href: "#plans" },
   { label: "Menu", href: "#menu" },
   { label: "How It Works", href: "#how" },
+  { label: "About", href: "#about" },
   { label: "Reviews", href: "#reviews" },
   { label: "Help", href: "#help" },
 ];
@@ -36,10 +38,12 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
   };
 
   const handleLogout = async () => {
-    try {
-      await logout();
-    } catch (err) {
-      console.error("Logout failed:", err.message);
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        await logout();
+      } catch (err) {
+        console.error("Logout failed:", err.message);
+      }
     }
   };
 
@@ -49,8 +53,18 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
   return (
     <nav className={`navbar${scrolled ? " scrolled" : ""}`} id="mainNav">
       <div className="container navbar-inner">
-        <Link className="brand-logo" to="/">
-          Tiffin<span>Box</span>
+        <Link
+          className="brand-logo"
+          to="/"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setMenuOpen(false);
+          }}
+        >
+          {/* Light Mode Logo (Dark Text) */}
+          <img src="/food-box-logo-white-team.svg" alt="Food Box Logo" className="brand-logo-img logo-light" />
+          {/* Dark Mode Logo (White Text) */}
+          <img src="/food-box-logo.svg" alt="Food Box Logo" className="brand-logo-img logo-dark" />
         </Link>
 
         <div className={`nav-center${menuOpen ? " open" : ""}`}>
@@ -80,14 +94,15 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 <span className="user-greeting">
                   Hi, {user.displayName || getNameFromEmail(user.email)}
                 </span>
-                <Link to="/dashboard/profile" className="btn-profile">
-                  Profile
+                <Link to="/dashboard/profile" className="btn-profile-card" title="Profile">
+                  <FiUser />
                 </Link>
-                <Link to="/about" className="btn-profile">
-                  About
-                </Link>
-                <button className="btn-sign-in" onClick={handleLogout}>
-                  Logout
+                <button 
+                  className="btn-logout-card" 
+                  onClick={handleLogout}
+                  title="Logout"
+                >
+                  <FiLogOut />
                 </button>
               </>
             ) : (
@@ -95,9 +110,6 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 Sign In
               </button>
             )}
-            <button className="btn-order-now" onClick={onOrderNow}>
-              Order Now
-            </button>
           </div>
         </div>
 
