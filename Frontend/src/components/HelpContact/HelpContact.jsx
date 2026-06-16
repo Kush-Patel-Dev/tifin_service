@@ -306,7 +306,7 @@ const HelpContact = () => {
                   </div>
                   <div>
                     <div className="contact-info-label">Email</div>
-                    <div className="contact-info-value">foodbox1404@gmail.com</div>
+                    <div className="contact-info-value">hello@tiffinbox.in</div>
                   </div>
                 </div>
                 <div className="contact-info-card">

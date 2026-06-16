@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import ScrollReveal from "../ScrollReveal/ScrollReveal";
 import "./MenuPreview.css";
 
@@ -109,86 +109,89 @@ const MenuPreview = () => {
             </div>
           ) : filteredMeals.length > 0 ? (
             filteredMeals.map((item, i) => (
-              <div className="col-lg-3 col-md-6 col-12 mb-4" key={item.id}>
-                <ScrollReveal delay={i * 0.08} className="h-100">
-                  <div className="menu-item-card h-100">
-                    <div className="menu-item-img">
-                      {item.imageUrl ? (
-                        <img
-                          src={item.imageUrl}
-                          alt={item.mealName}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
-                        />
-                      ) : (
-                        <span>🍽️</span>
-                      )}
-                    </div>
-                    <div className="menu-item-body">
-                      <div className="menu-item-name">{item.mealName}</div>
-                      <div className="menu-item-desc">{item.description}</div>
-                      <div className="menu-item-footer">
-                        <div className="menu-item-price">₹{item.price}</div>
-                        <div className="menu-item-cal">
-                          {item.mealName?.toLowerCase().includes("poha") &&
-                          item.mealName?.toLowerCase().includes("chutney")
-                            ? "280 kcal"
-                            : item.mealName?.toLowerCase().includes("paratha")
-                              ? "420 kcal"
-                              : item.mealName?.toLowerCase().includes("upma")
-                                ? "310 kcal"
-                                : item.mealName
-                                      ?.toLowerCase()
-                                      .includes("idli") ||
-                                    item.mealName
-                                      ?.toLowerCase()
-                                      .includes("vada")
-                                  ? "380 kcal"
+              <Fragment key={item.id}>
+                <div className="col-lg-3 col-md-6 col-12 mb-4">
+                  <ScrollReveal delay={i * 0.08} className="h-100">
+                    <div className="menu-item-card h-100">
+                      <div className="card-glow"></div>
+                      <div className="menu-item-img">
+                        {item.imageUrl ? (
+                          <img
+                            src={item.imageUrl}
+                            alt={item.mealName}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        ) : (
+                          <span>🍽️</span>
+                        )}
+                      </div>
+                      <div className="menu-item-body">
+                        <div className="menu-item-name">{item.mealName}</div>
+                        <div className="menu-item-desc">{item.description}</div>
+                        <div className="menu-item-footer">
+                          <div className="menu-item-price">₹{item.price}</div>
+                          <div className="menu-item-cal">
+                            {item.mealName?.toLowerCase().includes("poha") &&
+                            item.mealName?.toLowerCase().includes("chutney")
+                              ? "280 kcal"
+                              : item.mealName?.toLowerCase().includes("paratha")
+                                ? "420 kcal"
+                                : item.mealName?.toLowerCase().includes("upma")
+                                  ? "310 kcal"
                                   : item.mealName
                                         ?.toLowerCase()
-                                        .includes("dal tadka")
-                                    ? "650 kcal"
+                                        .includes("idli") ||
+                                      item.mealName
+                                        ?.toLowerCase()
+                                        .includes("vada")
+                                    ? "380 kcal"
                                     : item.mealName
                                           ?.toLowerCase()
-                                          .includes("khichdi")
-                                      ? "420 kcal"
+                                          .includes("dal tadka")
+                                      ? "650 kcal"
                                       : item.mealName
                                             ?.toLowerCase()
-                                            .includes("rajma")
-                                        ? "580 kcal"
+                                            .includes("khichdi")
+                                        ? "420 kcal"
                                         : item.mealName
                                               ?.toLowerCase()
-                                              .includes("chole")
-                                          ? "720 kcal"
+                                              .includes("rajma")
+                                          ? "580 kcal"
                                           : item.mealName
                                                 ?.toLowerCase()
-                                                .includes("biryani")
-                                            ? "600 kcal"
+                                                .includes("chole")
+                                            ? "720 kcal"
                                             : item.mealName
                                                   ?.toLowerCase()
-                                                  .includes("paneer")
-                                              ? "550 kcal"
+                                                  .includes("biryani")
+                                              ? "600 kcal"
                                               : item.mealName
                                                     ?.toLowerCase()
-                                                    .includes("roti")
-                                                ? "480 kcal"
+                                                    .includes("paneer")
+                                                ? "550 kcal"
                                                 : item.mealName
                                                       ?.toLowerCase()
-                                                      .includes("soup") ||
-                                                    item.mealName
-                                                      ?.toLowerCase()
-                                                      .includes("salad")
-                                                  ? "280 kcal"
-                                                  : "320 kcal"}
+                                                      .includes("roti")
+                                                  ? "480 kcal"
+                                                  : item.mealName
+                                                        ?.toLowerCase()
+                                                        .includes("soup") ||
+                                                      item.mealName
+                                                        ?.toLowerCase()
+                                                        .includes("salad")
+                                                    ? "280 kcal"
+                                                    : "320 kcal"}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </ScrollReveal>
-              </div>
+                  </ScrollReveal>
+                </div>
+              </Fragment>
             ))
           ) : (
             <div className="col-12 text-center py-5">

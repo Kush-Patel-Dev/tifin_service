@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiLogOut, FiUser } from "react-icons/fi";
 import DarkMode from "../DarkMode/DarkMode";
 import { useAuth } from "../../context/AuthContext";
 import { getNameFromEmail } from "../../utils/nameHelper";
@@ -8,10 +7,10 @@ import "./Navbar.css";
 
 const navItems = [
   { label: "Why Us", href: "#features" },
+  { label: "About", href: "#about" },
   { label: "Meal Plans", href: "#plans" },
   { label: "Menu", href: "#menu" },
   { label: "How It Works", href: "#how" },
-  { label: "About", href: "#about" },
   { label: "Reviews", href: "#reviews" },
   { label: "Help", href: "#help" },
 ];
@@ -53,18 +52,8 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
   return (
     <nav className={`navbar${scrolled ? " scrolled" : ""}`} id="mainNav">
       <div className="container navbar-inner">
-        <Link
-          className="brand-logo"
-          to="/"
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            setMenuOpen(false);
-          }}
-        >
-          {/* Light Mode Logo (Dark Text) */}
-          <img src="/food-box-logo-white-team.svg" alt="Food Box Logo" className="brand-logo-img logo-light" />
-          {/* Dark Mode Logo (White Text) */}
-          <img src="/food-box-logo.svg" alt="Food Box Logo" className="brand-logo-img logo-dark" />
+        <Link className="brand-logo" to="/">
+          Food <span>Box</span>
         </Link>
 
         <div className={`nav-center${menuOpen ? " open" : ""}`}>
@@ -94,15 +83,11 @@ const Navbar = ({ onSignIn, onOrderNow }) => {
                 <span className="user-greeting">
                   Hi, {user.displayName || getNameFromEmail(user.email)}
                 </span>
-                <Link to="/dashboard/profile" className="btn-profile-card" title="Profile">
-                  <FiUser />
+                <Link to="/dashboard/profile" className="btn-profile">
+                  Profile
                 </Link>
-                <button 
-                  className="btn-logout-card" 
-                  onClick={handleLogout}
-                  title="Logout"
-                >
-                  <FiLogOut />
+                <button className="btn-sign-in" onClick={handleLogout}>
+                  Logout
                 </button>
               </>
             ) : (

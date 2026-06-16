@@ -144,21 +144,6 @@
   text-align: center;
 }
 
-.plan-price-row {
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  line-height: 1;
-}
-
-.plan-currency {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--saffron, #e8851a);
-  margin-right: 4px;
-}
-
 .plan-price {
   font-family: var(--font-heading);
   font-size: 3.5rem;
@@ -172,7 +157,19 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: inline-block;
   line-height: 1;
+}
+
+.plan-price sup {
+  font-size: 1.6rem;
+  font-weight: 700;
+  vertical-align: super;
+  margin-right: 6px;
+  background: var(--saffron, #e8851a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .plan-period {
@@ -273,16 +270,6 @@
   }
 }
 
-@media (max-width: 767px) {
-  .plan-price {
-    font-size: 2.8rem;
-  }
-
-  .plan-currency {
-    font-size: 1.3rem;
-  }
-}
-
 /* ===== Premium Glassmorphic Dark Mode ===== */
 [data-theme="dark"] .plans-section {
   background: #0f172a; /* Sleek dark blue/slate only for this section */
@@ -329,10 +316,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-[data-theme="dark"] .plan-currency {
-  color: #f59e0b;
 }
 
 [data-theme="dark"] .plan-feature-item {

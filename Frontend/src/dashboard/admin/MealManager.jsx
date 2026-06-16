@@ -47,6 +47,7 @@ const MealManager = () => {
     { label: "Khichdi", value: "/images/meals/khichdi.jpg" },
     { label: "Paneer Butter Masala", value: "/images/meals/aesthetic-paneer-butter-masala_864588-20269.jpg" },
     { label: "Idli Chutney", value: "/images/meals/professional-food-photography-of-idli-with-chutney_1177187-245461.jpg" },
+    { label: "Idli Vada Combo", value: "/images/meals/idli-vada-combo.png" },
     { label: "Stuffed Paratha", value: "/images/meals/spicy-potato-stuffed-paratha-popular-street-food-aloo-paratha-alu-paratha-picture_1020697-123521.jpg" },
     { label: "Roti Sabzi Combo", value: "/images/meals/roti-sabzi combo.jpg" },
     { label: "Roti Sabzi New", value: "/images/meals/roti-sabzi-new.png" },

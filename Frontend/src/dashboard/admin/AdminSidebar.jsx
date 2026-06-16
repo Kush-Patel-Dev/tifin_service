@@ -69,7 +69,7 @@ const AdminSidebar = ({ collapsed, toggleSidebar }) => {
             handleLinkClick();
           }}
           className="admin-menu-item" 
-          style={{ width: '100%', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px' }}
+          style={{ width: '100%', color: '#ef4444' }}
         >
           <FiLogOut />
           <span className="admin-menu-text">Log Out</span>
