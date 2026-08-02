@@ -34,10 +34,41 @@ const MenuPreview = () => {
           mealsRef,
           (snapshot) => {
             if (!isMounted) return;
-            const mealData = snapshot.docs.map((doc) => ({
-              id: doc.id,
-              ...doc.data(),
-            }));
+            let mealData = snapshot.docs.map((doc) => {
+              const data = doc.data();
+              if (
+                data.menuType === "Breakfast" &&
+                (data.mealName || "").toLowerCase().includes("idli")
+              ) {
+                return {
+                  id: doc.id,
+                  ...data,
+                  mealName: "Idli Vada Combo",
+                  imageUrl: "/images/meals/idli-vada-combo.jpg",
+                };
+              }
+              return { id: doc.id, ...data };
+            });
+            const hasIdliCombo = mealData.some(
+              (m) =>
+                m.menuType === "Breakfast" &&
+                (m.mealName || "").toLowerCase() === "idli vada combo"
+            );
+            if (!hasIdliCombo) {
+              mealData = [
+                {
+                  id: "default-idli-combo",
+                  mealName: "Idli Vada Combo",
+                  menuType: "Breakfast",
+                  description:
+                    "Soft steamed idlis & crispy medu vadas served with fresh coconut chutney and sambar.",
+                  price: 80,
+                  imageUrl: "/images/meals/idli-vada-combo.jpg",
+                  isActive: true,
+                },
+                ...mealData,
+              ];
+            }
             setMeals(mealData);
             setLoading(false);
             clearTimeout(timeout);
@@ -64,7 +95,49 @@ const MenuPreview = () => {
     };
   }, []);
 
-  const filteredMeals = meals.filter((meal) => meal.menuType === activeTab);
+  const getMealImage = (item) => {
+    const name = (item.mealName || "").toLowerCase();
+    if (name.includes("idli") || name.includes("vada") || name.includes("combo")) {
+      return "/images/meals/idli-vada-combo.jpg";
+    }
+    if (item.imageUrl && item.imageUrl.trim() !== "") {
+      return item.imageUrl;
+    }
+    if (name.includes("poha")) return "/images/meals/poha.jpg";
+    if (name.includes("thali")) return "/images/meals/thali.jpg";
+    if (name.includes("chole") || name.includes("bhature")) return "/images/meals/Chloe-Bhature.jpg";
+    if (name.includes("biryani")) return "/images/meals/biryani.jpg";
+    if (name.includes("dal")) return "/images/meals/india-food-dal-tadka.jpg";
+    if (name.includes("khichdi")) return "/images/meals/khichdi.jpg";
+    if (name.includes("paneer")) return "/images/meals/aesthetic-paneer-butter-masala_864588-20269.jpg";
+    if (name.includes("paratha")) return "/images/meals/spicy-potato-stuffed-paratha-popular-street-food-aloo-paratha-alu-paratha-picture_1020697-123521.jpg";
+    if (name.includes("roti") || name.includes("sabzi")) return "/images/meals/roti-sabzi combo.jpg";
+    if (name.includes("upma")) return "/images/meals/o0k32qmg_upma_625x300_10_July_23.jpg";
+    if (name.includes("soup") || name.includes("salad")) return "/images/meals/soup-saladbowl.jpg";
+    return null;
+  };
+
+  let filteredMeals = meals.filter((meal) => meal.menuType === activeTab);
+  if (activeTab === "Breakfast") {
+    const hasIdli = filteredMeals.some((m) =>
+      (m.mealName || "").toLowerCase().includes("idli")
+    );
+    if (!hasIdli) {
+      filteredMeals = [
+        {
+          id: "default-idli-combo",
+          mealName: "Idli Vada Combo",
+          menuType: "Breakfast",
+          description:
+            "Soft steamed idlis & crispy medu vadas served with fresh coconut chutney and sambar.",
+          price: 80,
+          imageUrl: "/images/meals/idli-vada-combo.jpg",
+          isActive: true,
+        },
+        ...filteredMeals,
+      ];
+    }
+  }
 
   return (
     <section className="menu-section" id="menu">
@@ -113,9 +186,9 @@ const MenuPreview = () => {
                 <ScrollReveal delay={i * 0.08} className="h-100">
                   <div className="menu-item-card h-100">
                     <div className="menu-item-img">
-                      {item.imageUrl ? (
+                      {getMealImage(item) ? (
                         <img
-                          src={item.imageUrl}
+                          src={getMealImage(item)}
                           alt={item.mealName}
                           style={{
                             width: "100%",
